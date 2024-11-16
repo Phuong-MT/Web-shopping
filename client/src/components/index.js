@@ -1,0 +1,8 @@
+export {default as Button} from './Button'
+export {default as InputForm} from './InputForm'
+export {default as Searchitem} from './Searchitem'
+export {default as ProvinceBtn} from './ProvinceBtn'
+export {default as Province} from './Province'
+export {default as Banner} from './Banner'
+export {default as Sort} from './Sort'
+export {default as User} from './User'
