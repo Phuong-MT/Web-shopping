@@ -22,17 +22,17 @@ const Navigation = ()=>{
                  <div className='w-full flex h-full items-center text-sm font-medium '>
                     <NavLink
                         to={'/'}
-                        className= ' p-4 h-full items-center hover:text-orange-500'
+                        className= ' p-4 h-full items-center hover:text-orange-500 underline'
                         >
                         TRANG CHỦ
                     </NavLink>
                     {categories?.length > 0 && categories.map(item => {
                         return (
-                            <div key={item.code} className='items-center  px-4 h-full' >
+                            <div key={item.code} className='items-center  px-4 h-full ' >
                                 
                                 <NavLink
                                     to={`/${formatVietnameseToString(item.header)}`}
-                                    className= ' p-4 h-full items-center hover:text-orange-500'
+                                    className= ' p-4 h-full items-center hover:text-orange-500 underline' 
                                 >
                                     {item.header}
                                     

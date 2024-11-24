@@ -1,7 +1,8 @@
 import actionTypes from "../actions/actionTypes";
 const initState = {
     products: [],
-    msg: ''
+    msg: '',
+    count: 0
 }
 
 const productReducer = (state = initState, action) => {
@@ -11,7 +12,7 @@ const productReducer = (state = initState, action) => {
                 ...state,
                 products: action.products || [],
                 msg: action.msg || '',
-                // count: action.count || 0
+                count: action.count || 0
             }
             break;
 

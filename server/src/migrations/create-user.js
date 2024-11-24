@@ -21,6 +21,17 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+      address:{
+        type: Sequelize.STRING
+      },
+      gender:{
+        type: Sequelize.ENUM('Nam', 'Nữ', 'other'),
+        defaultValue: 'other',
+      },
+      dateOfBirth: {
+        type: Sequelize.DATEONLY,
+        allowNull: true,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -28,7 +39,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
     });
   },
   async down(queryInterface, Sequelize) {

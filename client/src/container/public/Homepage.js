@@ -8,7 +8,7 @@ return (
         
         <Province />
         <section className='justify-items-center'>
-            <h1 className='text-[28px] font-bold '>{text.HOME_TITLE1}</h1>
+            <h1 className='text-[28px] font-bold underline'>{text.HOME_TITLE1}</h1>
             <p> {text.HOME_DESCRIPTION}</p>
         </section>
         <section className='w-full gap-3' >
@@ -17,7 +17,6 @@ return (
             </div>
         </section>
         <section>
-            
         </section>
     </div>
 )

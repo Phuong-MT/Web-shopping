@@ -21,6 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'productId',
         as: 'images'
     });
+    //Thiết lập quan hệ với infoproduct
+    Product.hasMany(models.Infoproduct, {
+      foreignKey: 'productId',
+      as: 'info'
+    });
     }
   }
   Product.init({

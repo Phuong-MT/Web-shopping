@@ -1,5 +1,5 @@
+import { location } from '../../ultils/constant'
 import { Banner, Sort } from '../../components'
-import { banner } from '../../ultils/constant'
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,8 +7,7 @@ import { getproduct } from '../../store/actions';
 import { formatVietnameseToString } from '../../ultils/Conmon/formatVietnameseToString'
 
 
-
-const Nu = () => {
+const Signature = () => {
     const [filteredProducts, setFilteredProducts] = useState([]); 
     const dispatch = useDispatch();
     const { products } = useSelector((state) => state.product); 
@@ -20,25 +19,26 @@ const Nu = () => {
 
     useEffect(() => {
     // Lọc sản phẩm theo tab đang hoạt động
-    const filtered = products.filter((product) => product.category?.header === 'Nữ');
+    const filtered = products.filter((product) => product.category?.header === 'SIGNATURE');
     setFilteredProducts(filtered);
     }, [products]); // Chạy lại khi  danh sách sản phẩm thay đổi
+
   return (
-    <div className='gap-3'>
-      <div className='flex mt-[20px] flex-wrap'>
+    <div>
+    <div className='flex mt-[20px] flex-wrap'>
         <div className='w-1/5 flex flex-col pr-[20px]'>
-          <Sort/>
+            <Sort/>
         </div>
         <div className='pl-[20px] w-4/5'>
-          <h1 className='pb-[26px] text-2xl font-semibold'> NEW ARRIVAL</h1>
-          {banner[0] && (
+            <h1 className='pb-[26px] text-2xl font-semibold	'> HER SIGNATURE | FALL - WINTER COLLECTION 2024 </h1>
+            {location[1] && (
             <Banner
-                key={banner[0].id}
-                image={banner[0].image}
-                name={banner[0].name}
+                key={location[1].id}
+                image={location[1].image}
+                name={location[1].name}
             />
-          )}
-          <div className="flex flex-wrap mt-4">
+            )}
+            <div className="flex flex-wrap mt-4">
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product, index) => (
                             <div key={product.id} className="product-item p-4  mb-4">
@@ -54,7 +54,6 @@ const Nu = () => {
                             />
                             <img 
                                 src ={product.images.color}
-                                alt={product.images.color}
                                 style={{
                                     marginTop: '5px',
                                     marginLeft: '20px',
@@ -78,10 +77,9 @@ const Nu = () => {
                     )}
                 </div>
         </div>
-      </div>
-
-    </div>
+  </div>
+</div>
   )
 }
 
-export default Nu
+export default Signature

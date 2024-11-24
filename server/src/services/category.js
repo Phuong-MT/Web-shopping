@@ -1,4 +1,4 @@
-import { where } from 'sequelize'
+
 import db from '../models'
 
 //GET ALL CATEGORY
@@ -8,7 +8,7 @@ export const getCategoriesSerivce = () => new Promise(async (resolve, reject) =>
             raw: true,
             //attributes: { exclude: ['description', 'createdAt', 'updatedAt'] } remove attributes 
             attributes:['code', 'header'],
-            where: {header:['NAM', 'NỮ','TRẺ EM','THÁNG VÀNG SĂN SALE']}
+            where: {header:['NAM', 'NỮ','THÁNG VÀNG SĂN SALE']}
         })
         resolve({
             err: response ? 0 : 1,

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Children } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getproduct } from '../../store/actions';
+import { formatVietnameseToString } from '../../ultils/Conmon/formatVietnameseToString'
 
 const List = () => {
   const [activeTab, setActiveTab] = useState('Lucky Moda'); 
@@ -23,7 +24,6 @@ const List = () => {
   const handleTabClick = (tabName) => {
     setActiveTab(tabName); // Cập nhật tab đang hoạt động
   };
-
   return (
     <div className="w-full">
       {/* Tabs */}
@@ -32,7 +32,7 @@ const List = () => {
           <button
             key={tabName}
             className={`w-1/3 justify-items-center mb-[15px] p-2 ${
-              activeTab === tabName ? 'border-2 border-b-black' : ''
+              activeTab === tabName ? ' underline' : ''
             }`}
             onClick={() => handleTabClick(tabName)}
           >
@@ -70,7 +70,7 @@ const List = () => {
                       height: '18px'
                   }}
                 />
-                <Link to = {'/'}>
+                <Link to = {`/chi-tiet/${formatVietnameseToString(product.name)}/${product.id}`}>
                 <h3 className="text-lg font-sm w-[220px]">{product.name}</h3>
                 </Link>
                 <p className="text-gray-700 items-center">{product.price}đ</p>
