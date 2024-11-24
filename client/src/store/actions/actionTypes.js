@@ -8,9 +8,9 @@ const actionTypes = {
     LOGIN_FAIL: 'LOGIN_FAIL',
 
     GET_PRODUCT: 'GET_PRODUCT',
-
     // USER
-    GET_CURRENT: 'GET_CURRENT'
+    GET_CURRENT: 'GET_CURRENT',
+    PUT_ACCOUNT: 'PUT_ACCOUNT'
 }
 
 export default actionTypes

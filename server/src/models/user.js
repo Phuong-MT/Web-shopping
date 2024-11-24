@@ -10,14 +10,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasOne(models.CustomerSupport, {
+        foreignKey: 'userId',
+         as: 'user'
+    });
     }
   }
   User.init({
     name: DataTypes.STRING,
     password: DataTypes.STRING,
     phone: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: DataTypes.STRING,
+    address:DataTypes.STRING,
+    gender: {
+              type: DataTypes.ENUM('Nam', 'Nữ', 'other'),
+              defaultValue: 'other',
+            },
+    dateOfBirth: {
+                type: DataTypes.DATEONLY,
+                allowNull: true,
+            },
   }, {
     sequelize,
     modelName: 'User',

@@ -1,5 +1,5 @@
 import actionTypes from "./actionTypes";
-import { apiGetProduct } from "../../service/product";
+import { apiGetProduct} from "../../service/product";
 
 export const getproduct = () => async (dispatch) =>{
     try {

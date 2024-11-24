@@ -3,6 +3,7 @@ import Header from './Header'
 import { Outlet } from 'react-router-dom'
 import {Navigation, Search} from './index'
 import {useSelector } from 'react-redux'
+import { Fonter } from '../../components'
 
 const Home = () => {
    
@@ -16,10 +17,12 @@ const Home = () => {
                 <header className='justify-items-center'>
                     {isLoggedIn && <Search />}
                 </header> 
-                <div className='w-full  justify-items-center  mt-3'>
+                <div className='w-full  justify-items-center  mt-3 border border-b-gray-500'>
                     <Outlet />
                 </div>
+                <Fonter/>
             </div>
+           
         </>
        
     )

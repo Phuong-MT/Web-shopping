@@ -9,7 +9,7 @@ const Nam = () => {
           <Sort/>
         </div>
         <div className='pl-[20px] w-3/4'>
-          <h1 className='pb-[26px] text-2xl'> NEW ARRIVAL</h1>
+          <h1 className='pb-[26px] text-2xl font-semibold'> NEW ARRIVAL</h1>
           {banner[1] && (
             <Banner
                 key={banner[1].id}

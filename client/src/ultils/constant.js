@@ -5,7 +5,14 @@ export const path = {
     NU: 'nu', 
     TRE_EM : 'tre-em', 
     SALE: 'thang-vang-san-sale',
-    SYSTEM : '/he-thong/*'
+    SYSTEM : '/he-thong/*',
+    DETAL_POST__TITLE__POSTID: 'chi-tiet/:title/:postId',
+    SEARCH: 'tim-kiem',
+    ACCOUNT:'thong-tin-tai-khoan',
+    CONTACT:'ho-tro-va-hoi-dap',
+    SOLAR:'solar---shine-together',
+    HER_SIGNATRUE:'her-signature',
+    SAPPHIRE_CHIC:'sapphire-chic'
 }
 
 
