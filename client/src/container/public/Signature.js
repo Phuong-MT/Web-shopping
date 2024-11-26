@@ -2,32 +2,32 @@ import { location } from '../../ultils/constant'
 import { Banner, Sort } from '../../components'
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getproduct } from '../../store/actions';
+import { apiGetProductQR } from "../../service";
 import { formatVietnameseToString } from '../../ultils/Conmon/formatVietnameseToString'
 
 
 const Signature = () => {
     const [filteredProducts, setFilteredProducts] = useState([]); 
-    const dispatch = useDispatch();
-    const { products } = useSelector((state) => state.product); 
-
-    useEffect(() => {
-        // Lấy tất cả sản phẩm khi component được render
-        dispatch(getproduct());
-      }, [dispatch]);
-
-    useEffect(() => {
-    // Lọc sản phẩm theo tab đang hoạt động
-    const filtered = products.filter((product) => product.category?.header === 'SIGNATURE');
+    const [query, setQuery] = useState({
+      Size: '',
+      Color: '',
+      Price: '',
+      Upgrade: '',
+    });
+  useEffect(() => {
+    const f = async function fetchData(){  
+    const response = await apiGetProductQR(query);
+    const data = response?.data?.response
+    const filtered = data.filter((product) => product.category?.header === 'Nữ');
     setFilteredProducts(filtered);
-    }, [products]); // Chạy lại khi  danh sách sản phẩm thay đổi
-
+  }
+  f();
+  }, [query]); // Chạy lại khi  danh sách sản phẩm thay đổi
   return (
     <div>
     <div className='flex mt-[20px] flex-wrap'>
         <div className='w-1/5 flex flex-col pr-[20px]'>
-            <Sort/>
+        <Sort query={query} setQuery={setQuery}/>
         </div>
         <div className='pl-[20px] w-4/5'>
             <h1 className='pb-[26px] text-2xl font-semibold	'> HER SIGNATURE | FALL - WINTER COLLECTION 2024 </h1>
@@ -54,6 +54,7 @@ const Signature = () => {
                             />
                             <img 
                                 src ={product.images.color}
+                                alt={product.images.color}
                                 style={{
                                     marginTop: '5px',
                                     marginLeft: '20px',

@@ -11,6 +11,18 @@ export const getProduct= async(req, res) =>{
         })
     }
 } 
+export const getProductQR= async(req, res) =>{
+    try {
+        const {...query} = req.query
+        const response = await services.getProductQRSerivce(query)
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(500).json({
+            err:-1,
+            msg: 'Faild at category controller: '+error
+        })
+    }
+} 
 export const getProductLimit = async (req, res) => {
     try {
         const { postId } = req.params;  // Lấy từ params

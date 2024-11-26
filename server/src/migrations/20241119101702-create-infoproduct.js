@@ -18,7 +18,7 @@ module.exports = {
       color: {
         type: Sequelize.STRING
       },
-      material: {
+      version: {
         type: Sequelize.STRING
       },
       createdAt: {
