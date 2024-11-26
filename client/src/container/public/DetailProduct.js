@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { apiGetProductLimit } from '../../service';
 import Swal from 'sweetalert2'
+import { apiPostOrder } from '../../service';
+
 const DetailProduct = () => {
+    const { isLoggedIn } = useSelector(state => state.auth)
     const {postId} = useParams();
     const [product, setProduct] = useState(null); 
     const [error, setError] = useState('');
@@ -72,10 +76,32 @@ const DetailProduct = () => {
                 : prev.quantity
         }));
       };
-    console.log(product)
-    console.log(formData)
-    const handleSubmit = ()=> {
-        console.log('a'); 
+
+    const handleSubmit = async()=> {
+        if(!isLoggedIn){
+            Swal.fire('Oops!', 'Bạn cần đăng nhập trước khi thêm sản phẩm', 'error');
+        }
+        else{
+            if(formData.Size === ''){
+                Swal.fire('Oops!', 'Bạn chưa chọn size', 'error');
+            }
+            else{
+                try {
+                    console.log(formData)
+                    const response = await apiPostOrder(formData)
+                    if(response?.data?.err === 0){
+                        Swal.fire({
+                        icon: 'success',
+                        title: 'Thành công',
+                        text: `Đã thêm sản phảm ${formData.name} vào giỏ hàng` ,
+                    });
+                    }
+                
+                } catch (error) {
+                    console.log(error)
+                }
+        }
+        }
       };
     return (
         <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
@@ -99,7 +125,7 @@ const DetailProduct = () => {
                             <button
                                 key={size}
                                 className={`border-2 mx-[2px] justify-items-center mb-[15px] p-2 ${
-                                    activeTab === size ? 'underline' : ''
+                                    activeTab === size ? 'underline bg-gray-500 text-white' : ''
                                 }`}
                                 onClick={() => {
                                     handleChange('Size', size);
@@ -112,6 +138,7 @@ const DetailProduct = () => {
                         <p className='text-xl font-medium text-gray-800 mb-4'>Màu sắc:  {product.info.color}</p>
                         <div className='mb-4'>
                             <img 
+                                alt={product.images.color}
                                 src ={product.images.color}
                                 style={{
                                         marginTop: '5px',
@@ -150,7 +177,7 @@ const DetailProduct = () => {
                     {/* Các tuỳ chọn hoặc nút */}
                     <button className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600"
                     onClick={()=>{
-                        handleSubmit(formData)
+                        handleSubmit()
                     }}
                     >
                         Thêm vào giỏ hàng

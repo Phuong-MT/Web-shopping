@@ -8,6 +8,7 @@ const initState = {
 const productReducer = (state = initState, action) => {
     switch (action.type){
         case actionTypes.GET_PRODUCT:
+        case actionTypes.GET_PRODUCT_QR:
             return {
                 ...state,
                 products: action.products || [],

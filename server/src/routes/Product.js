@@ -5,4 +5,5 @@ const router = expess.Router()
 
 router.get('/all', controller.getProduct)
 router.get('/limit/:postId', controller.getProductLimit)
+router.get('/sort', controller.getProductQR)
 export default router
