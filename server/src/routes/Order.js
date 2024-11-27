@@ -5,5 +5,5 @@ import * as controller from '../controllers/Order'
 const router = expess.Router()
 router.use(verifyToken)
 router.post('/', controller.postOrder)
-
+router.get('/shopping-cart', controller.getOrder)
 export default router

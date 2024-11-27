@@ -13,3 +13,15 @@ export const apiPostOrder = (formData) => new Promise(async (resolve, reject) =>
         reject(error)
     }
 })
+export const apigetOrder = () => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `/api/v1/order/shopping-cart`,
+        })
+        resolve(response)
+
+    } catch (error) {
+        reject(error)
+    }
+})

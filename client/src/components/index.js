@@ -13,3 +13,7 @@ export {default as AccountInfo} from './AccountInfo'
 export {default as ContactForm} from './ContactForm'
 export {default as ContactCard } from './ContactCard'
 export {default as Fonter } from './Fonter'
+
+export {default as CartItem} from './CartItem'
+export {default as CartList} from './CartList'
+export {default as Summary} from './Summary'

@@ -10,6 +10,7 @@ export const path = {
     SEARCH: 'tim-kiem',
     ACCOUNT:'thong-tin-tai-khoan',
     CONTACT:'ho-tro-va-hoi-dap',
+    SHOPPINGCART:'quan-ly-gio-hang',
     SOLAR:'solar---shine-together',
     HER_SIGNATRUE:'her-signature',
     SAPPHIRE_CHIC:'sapphire-chic'

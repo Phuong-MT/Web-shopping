@@ -27,6 +27,9 @@ module.exports = {
       totalPrice: {
         type: Sequelize.DECIMAL
       },
+      imageUrl:{
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
