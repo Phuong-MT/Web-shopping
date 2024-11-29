@@ -86,7 +86,8 @@ const Login = () => {
                 <div className='w-full flex flex-col gap-5'>
                     {isRegister && <InputForm
                         setInvalidFields={setInvalidFields}
-                        invalidFields={invalidFields} label={'HỌ TÊN'}
+                        invalidFields={invalidFields} 
+                        label={'HỌ TÊN'}
                         value={payload.name}
                         setValue={setPayload}
                         keyPayload={'name'}

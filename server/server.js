@@ -3,7 +3,7 @@ require("dotenv").config()
 import cors from 'cors'
 import initRoutes from './src/routes';
 import connectdb from './src/config/connectDB';
-import { getOrderService } from './src/services/Order';
+import { deleteOrderService } from './src/services/Order';
 
 const app = express()
 

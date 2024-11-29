@@ -6,4 +6,5 @@ const router = expess.Router()
 router.use(verifyToken)
 router.post('/', controller.postOrder)
 router.get('/shopping-cart', controller.getOrder)
+router.delete(`/:orderitemsId`, controller.DeleteOrder)
 export default router
