@@ -15,7 +15,8 @@ const DetailProduct = () => {
         productId: '',
         quantity:1,
         Size:'',
-        price: ''
+        price: '',
+        imageUrl: '',
     })
     const [activeTab, setActiveTab] = useState('');
     
@@ -33,6 +34,7 @@ const DetailProduct = () => {
                         name: productData.name || '', // Đảm bảo có fallback khi không có dữ liệu
                         productId: productData.id || '', 
                         price :productData.price || '',
+                        imageUrl: productData.images.imageUrl || ''
                     }));
                 } else {
                     throw new Error(response?.data?.err || 'Error fetching product');
@@ -76,6 +78,9 @@ const DetailProduct = () => {
                 : prev.quantity
         }));
       };
+
+// test 
+console.log(formData)
 
     const handleSubmit = async()=> {
         if(!isLoggedIn){

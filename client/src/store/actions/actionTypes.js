@@ -11,7 +11,8 @@ const actionTypes = {
     GET_PRODUCT_QR: 'GET_PRODUCT_QR',
     // USER
     GET_CURRENT: 'GET_CURRENT',
-    PUT_ACCOUNT: 'PUT_ACCOUNT'
+    PUT_ACCOUNT: 'PUT_ACCOUNT',
+
 }
 
 export default actionTypes

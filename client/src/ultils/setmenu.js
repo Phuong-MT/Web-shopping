@@ -11,8 +11,8 @@ const setmenu = [
     },
     {
         id: 2,
-        text: 'Quản lý đơn hàng ',
-        path: '/he-thong/quan-ly-don-hang',
+        text: 'Quản lý giỏ hàng ',
+        path: '/he-thong/quan-ly-gio-hang',
         icon:<AiOutlineShoppingCart />
     },
     {

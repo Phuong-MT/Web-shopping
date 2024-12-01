@@ -3,6 +3,7 @@ import categoryRoute from './category'
 import prodcutRoute from './Product'
 import userRouter from './user'
 import orderRoute from './Order'
+import adminRoute from './admin'
 const initRoutes = (app) =>{
     
     app.use('/api/v1/auth', authRoute)
@@ -10,6 +11,7 @@ const initRoutes = (app) =>{
     app.use('/api/v1/product', prodcutRoute)
     app.use('/api/v1/user', userRouter)
     app.use('/api/v1/order', orderRoute)
+    app.use('/api/v1/admin', adminRoute)
     return app.use( '/', (req, res)=>{
         res.send('server on...')
     })
