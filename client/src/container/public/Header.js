@@ -46,6 +46,9 @@ const Header = () => {
                     {
                         !isLoggedIn && <div className='flex items-center gap-1'>
                         <span >Luckystart xin chào !</span>
+    
+                        <button onClick={() => window.location.href = '/admin'}>Go to Admin</button>
+                        
                         <Button 
                             text={'Đăng nhập'} 
                             textColor={'text-white'} 

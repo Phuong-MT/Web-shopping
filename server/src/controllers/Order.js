@@ -37,6 +37,25 @@ export const getOrder = async(req, res) =>{
         })
     }
 } 
+export const UpdateOrder = async(req, res) =>{
+    try{
+        const {orderItemId} = req.params
+        const {quantity} = req.body
+        if(!quantity){
+            return res.status(500).json({
+                err:-1,
+                msg: 'Faild at Order controller: '+error
+            })
+        }
+        const response = await services.updateOrderService(quantity, orderItemId)
+        return res.status(200).json(response)
+    }catch(error){
+        return res.status(500).json({
+            err:-1,
+            msg: 'Faild at Order controller: '+error
+        })
+    }
+}
 export const DeleteOrder = async(req, res) =>{
     try {
         const { orderitemsId } = req.params

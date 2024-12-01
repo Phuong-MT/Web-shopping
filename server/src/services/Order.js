@@ -55,6 +55,30 @@ export const getOrderService = (userId) => new Promise(async (resolve, reject) =
     }
 })
 
+export const updateOrderService = (quantity, orderItemId) => new Promise(async(resolve, reject) => {
+    const orderItem = await db.OrderItem.findOne({
+        where: {id:orderItemId }
+    })
+    const total = orderItem.price * quantity
+    try {
+        const response = await db.OrderItem.update({
+            quantity: quantity,
+            totalPrice : total
+        },{
+            where:{id: orderItemId}
+        })
+        resolve({
+            err: response !== null && response !== undefined ? 0 : 1,
+            msg: 'OK',
+        });
+    } catch (error) {
+        reject({
+            err: -1,
+            msg: 'Failed at updateOrderService: ' + error.message,
+        });
+    }
+})
+
 export const deleteOrderService = (orderitemsId) => new Promise(async (resolve, reject) => {
     try {
         // Tìm OrderItem bằng ID

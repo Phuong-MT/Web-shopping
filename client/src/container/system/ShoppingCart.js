@@ -1,12 +1,12 @@
 import React, { useState,useEffect } from 'react';
 import {CartList, Summary} from '../../components/index';
-import { apigetOrder, apiDeleteOrder } from '../../service';
-
+import { apigetOrder, apiDeleteOrder, apiUpdateOrder} from '../../service';
+import Swal from 'sweetalert2'
 
 const ShoppingCart = () => {
     const [cartData, setCartData] = useState([]);
     useEffect(() =>{
-        const f = async function () {
+        const f = async() => {
             try {
                 const response = await apigetOrder()
                 const currentData = response?.data?.response
@@ -17,8 +17,13 @@ const ShoppingCart = () => {
         }
         f();
     },[])
-
-    const updateQuantity = (id, quantity) => {
+    const updateQuantity = async(id, quantity) => {
+        const formdata = {quantity : quantity}
+        try {
+            await apiUpdateOrder(formdata, id)
+        } catch (error) {
+            
+        }
         setCartData((prev) =>
             prev.map((order) => ({
                 ...order,
@@ -32,9 +37,15 @@ const ShoppingCart = () => {
     const removeItem = async(id) => {
         try {
             const response = await apiDeleteOrder(id)
-            console.log(response)
+            if(response?.data?.err === 0){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thành công',
+                    text: `Đã xóa sản phẩm khỏi giỏ hàng` ,
+                })
+            }
         } catch (error) {
-            
+            console.log(error)
         }
         setCartData((prev) =>
             prev.map((order) => ({

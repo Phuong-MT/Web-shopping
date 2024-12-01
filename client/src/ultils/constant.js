@@ -13,7 +13,8 @@ export const path = {
     SHOPPINGCART:'quan-ly-gio-hang',
     SOLAR:'solar---shine-together',
     HER_SIGNATRUE:'her-signature',
-    SAPPHIRE_CHIC:'sapphire-chic'
+    SAPPHIRE_CHIC:'sapphire-chic',
+    ADMIN: 'ADMIN'
 }
 
 
