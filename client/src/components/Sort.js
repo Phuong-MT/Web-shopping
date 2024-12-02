@@ -73,9 +73,13 @@ const Sort = ({query, setQuery}) => {
               >
                 <option value="">Chọn Màu Sắc</option>
                 <option value="Đỏ">Đỏ</option>
+                <option value="Trắng">Trắng</option>
+                <option value="Đen">Đen</option>
+                <option value="Nâu">Nâu</option>
                 <option value="Xanh">Xanh</option>
-                <option value="Lục">Lục</option>
+                <option value="Tím">Tím</option>
                 <option value="Vàng">Vàng</option>
+
               </select>
             </div>
           )}
@@ -123,6 +127,17 @@ const Sort = ({query, setQuery}) => {
             </div>
           )}
         </ul>
+        <button
+        className="flex items-center bg-blue-500 text-white m-[10px] px-6 py-2 rounded-lg shadow-sm hover:bg-blue-600"
+        onClick={()=>setQuery({
+          Size: '',
+          Color: '',
+          Price: '',
+          Upgrade: '',
+        })}
+      >
+        Bỏ Lọc
+      </button>
       </div>
     );
 };

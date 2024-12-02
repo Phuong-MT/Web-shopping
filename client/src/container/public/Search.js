@@ -1,47 +1,96 @@
-import React from 'react'
-import { Searchitem } from '../../components'
-// import { InputForm, Button } from '../../components'
-import icons from '../../ultils/icons'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import để chuyển hướng
+import { CiCirclePlus } from "react-icons/ci";
+import { IoChevronForwardCircleOutline } from "react-icons/io5";
+import { FiSearch } from "react-icons/fi";
 
-const {CiCirclePlus,IoChevronForwardCircleOutline, FiSearch} = icons
 const Search = () => {
-  return (
-    <div className='p-[10px] w-4/5 my-3 bg-[#febb02] rounded-lg flex-col lg:flex-row flex items-center justify-around gap-2'>
-        <span  className='cursor-pointer flex-1'><Searchitem
-        IconsAfter = {CiCirclePlus}
-        IconsBefore = {IoChevronForwardCircleOutline}
-        text = 'Loại quần áo'/>
-        </span>
-        <span  className='cursor-pointer flex-1'><Searchitem
-        IconsAfter = {CiCirclePlus}
-        IconsBefore = {IoChevronForwardCircleOutline}
-        text = 'Mức giá'/>
-        </span>
-        <span  className='cursor-pointer flex-1'><Searchitem 
-        IconsAfter = {CiCirclePlus}
-        IconsBefore = {IoChevronForwardCircleOutline}
-        text = 'Size'/>
-        </span>
-        <span  className='cursor-pointer flex-1'><Searchitem 
-        IconsAfter = {CiCirclePlus}
-        IconsBefore = {IoChevronForwardCircleOutline}
-        text = 'Màu sắc'/>
-        </span>
-        <span  className='cursor-pointer flex-1'>
-        <Searchitem 
-        IconsAfter = {CiCirclePlus}
-        IconsBefore = {IoChevronForwardCircleOutline}
-        text = 'Nâng cấp'/>
-        </span>
-       <button
-            type='button'
-            className='w-[100px] outline-none py-2 px-4 flex-1 bg-secondary1 text-[13.3px] flex items-center justify-center gap-2 text-white font-medium'
-            >
-            <FiSearch/>
-            Tìm kiếm
-        </button>
-    </div>
-  )
-}
+  const [activeDropdown, setActiveDropdown] = useState(null);
+  const [query, setQuery] = useState({
+    category: "",
+    price: "",
+    size: "",
+    color: "",
+    upgrade: "",
+  });
 
-export default Search
+  const navigate = useNavigate(); // Hook để chuyển hướng
+
+  const toggleDropdown = (dropdown) => {
+    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+  };
+
+  const handleOptionSelect = (dropdown, value) => {
+    setQuery((prev) => ({
+      ...prev,
+      [dropdown]: value,
+    }));
+    setActiveDropdown(null); // Đóng dropdown sau khi chọn
+  };
+
+  const handleSearch = () => {
+      const queryParams = new URLSearchParams(query).toString(); // Chuyển object thành query string
+      navigate(`/tim-kiem/?${queryParams}`); // Chuyển hướng đến DetailSearch
+
+      // Reset lại thanh tìm kiếm
+    setQuery({
+      category: "",
+      price: "",
+      size: "",
+      color: "",
+      upgrade: "",
+    });
+  };
+
+  const options = {
+    category: ["Áo thun", "Áo sơ mi", "Quần jean", "Váy"],
+    price: ["Dưới 100k", "100k - 200k", "200k - 500k", "Trên 500k"],
+    size: ["S", "M", "L", "XL"],
+    color: ["Đỏ", "Xanh", "Vàng", "Trắng"],
+    upgrade: ["Standard", "Premium", "Luxury"],
+  };
+
+  return (
+    <div className="relative flex flex-wrap bg-yellow-400 p-2 rounded-lg space-x-2">
+      {Object.keys(options).map((key) => (
+        <div className="relative" key={key}>
+          <button
+            className="flex items-center bg-white text-black px-4 py-2 rounded-lg shadow-sm hover:bg-gray-100"
+            onClick={() => toggleDropdown(key)}
+          >
+            {query[key]
+              ? `${key.charAt(0).toUpperCase() + key.slice(1)}: ${query[key]}`
+              : key.charAt(0).toUpperCase() + key.slice(1)}
+            <IoChevronForwardCircleOutline className="ml-2 text-lg" />
+          </button>
+
+          {activeDropdown === key && (
+            <div className="absolute top-full left-0 mt-2 bg-white shadow-md rounded-lg w-40">
+              {options[key].map((item, index) => (
+                <button
+                  key={index}
+                  className="flex items-center justify-between w-full text-left px-4 py-2 hover:bg-gray-100"
+                  onClick={() => handleOptionSelect(key, item)}
+                >
+                  {item}
+                  <CiCirclePlus className="text-gray-500 text-lg" />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+
+      {/* Search Button */}
+      <button
+        className="flex items-center bg-blue-500 text-white px-6 py-2 rounded-lg shadow-sm hover:bg-blue-600"
+        onClick={handleSearch}
+      >
+        <FiSearch className="mr-2 text-lg" />
+        Tìm kiếm
+      </button>
+    </div>
+  );
+};
+
+export default Search;

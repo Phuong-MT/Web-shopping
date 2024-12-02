@@ -53,14 +53,14 @@ export const getProductQRSerivce = (query) => new Promise(async (resolve, reject
                  {
                     model: db.Infoproduct, as: 'info',
                     attributes:['information','color','version'],
-                    // where: {
-                    //     color: {
-                    //       [Op.like]: `%${value1}%`,
-                    //     },
-                    //     version: {
-                    //         [Op.like]:  `%${value3}%`
-                    //       },
-                    //   },
+                    where: {
+                        color: {
+                          [Op.like]: `%${value1}%`,
+                        },
+                        version: {
+                            [Op.like]:  `%${value3}%`
+                          },
+                      },
                  }
                 
             ],

@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Home, Login, Nam, Nu, Sale, Homepage, Solar, Signature, Sapphire, DetailProduct} from './container/public'
+import { Home, Login, Nam, Nu, Sale, Homepage, Solar, Signature, Sapphire, DetailProduct,DetailSreach} from './container/public'
 import {path} from './ultils/constant'
 import {System, AccountManagement,Contact, ShoppingCart} from './container/system'
 import {admin } from './container/admin'
@@ -13,7 +13,7 @@ function App() {
 				<Route path={path.NAM} element= {<Nam/>}/>
 				<Route path={path.NU} element= {<Nu/>}/>
 				{/* <Route path={path.TRE_EM} element= {<Tre_em/>}/> */}
-				{/* <Route path={path.SREACH} element = {DetailSreach}/> */}
+				<Route path={'tim-kiem/*'} element = {<DetailSreach/>}/>
 				<Route path={path.SALE} element= {<Sale/>}/>
 				<Route path={path.SOLAR} element= {<Solar/>}/>
 				<Route path={path.HER_SIGNATRUE} element= {<Signature/>}/>
