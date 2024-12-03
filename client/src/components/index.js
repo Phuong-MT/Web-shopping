@@ -17,3 +17,5 @@ export {default as Fonter } from './Fonter'
 export {default as CartItem} from './CartItem'
 export {default as CartList} from './CartList'
 export {default as Summary} from './Summary'
+
+export {default as Step_1} from './Step_1'

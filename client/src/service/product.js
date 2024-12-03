@@ -38,3 +38,16 @@ export const apiGetProductLimit = (postId) => new Promise(async (resolve, reject
     }
 })
 
+export const apiGetProductSreach = (query) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `/api/v1/product/tim-kiem`,
+            params: query
+        })
+        resolve(response)
+
+    } catch (error) {
+        reject(error)
+    }
+})

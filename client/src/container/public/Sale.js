@@ -68,7 +68,10 @@ const Sale = () => {
                               <Link to = {`/chi-tiet/${formatVietnameseToString(product.name)}/${product.id}`}>
                               <h3 className="text-lg font-sm w-[220px]">{product.name}</h3>
                               </Link>
+                              <div>
                               <p className="text-gray-700 items-center">{product.price}đ</p>
+                              {/* <p className="text-gray-700 items-center line-through">{product.price}đ</p> */}
+                              </div>
                           </div>
                       ))
                   

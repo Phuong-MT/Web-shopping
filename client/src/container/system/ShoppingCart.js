@@ -1,9 +1,11 @@
 import React, { useState,useEffect } from 'react';
 import {CartList, Summary} from '../../components/index';
 import { apigetOrder, apiDeleteOrder, apiUpdateOrder} from '../../service';
+import { useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
 
 const ShoppingCart = () => {
+    const navigate = useNavigate();
     const [cartData, setCartData] = useState([]);
     useEffect(() =>{
         const f = async() => {
@@ -61,8 +63,11 @@ const ShoppingCart = () => {
             order.orderItem.reduce((sum, item) => sum + item.price*item.quantity, 0),
         0
     );
+   
     const handleCheckout = () => {
-        alert('Checkout process!');
+        //  sử dụng state để chuyển data qua các trang.
+        const totalPrice = total;
+        navigate('/he-thong/step-1', { state: {totalPrice}  });
     };
 
     return (

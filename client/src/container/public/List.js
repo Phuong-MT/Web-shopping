@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import React, { useState, useEffect, Children } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getproduct } from '../../store/actions';
 import { formatVietnameseToString } from '../../ultils/Conmon/formatVietnameseToString'
@@ -82,7 +82,7 @@ const List = () => {
           <p>Không có sản phẩm nào trong danh mục này.</p>
         )}
       </div>
-      <Link>
+      <Link to={`/${formatVietnameseToString(activeTab)}`}>
       <div className='flex flex-col items-center'>
         <span style={{
           border: '1px solid #221F20',

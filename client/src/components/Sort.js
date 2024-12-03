@@ -74,9 +74,11 @@ const Sort = ({query, setQuery}) => {
                 <option value="">Chọn Màu Sắc</option>
                 <option value="Đỏ">Đỏ</option>
                 <option value="Trắng">Trắng</option>
+                <option value="Xanh">Xanh</option>
                 <option value="Đen">Đen</option>
                 <option value="Nâu">Nâu</option>
-                <option value="Xanh">Xanh</option>
+                <option value="Ghi">Ghi</option>
+                <option value="Be">Be</option>
                 <option value="Tím">Tím</option>
                 <option value="Vàng">Vàng</option>
 

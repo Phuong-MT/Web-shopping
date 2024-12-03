@@ -8,13 +8,14 @@ const Search = () => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [query, setQuery] = useState({
     category: "",
-    price: "",
-    size: "",
+    // price: "",
+    // size: "",
     color: "",
-    upgrade: "",
+    gender:"",
+    // upgrade: "",
   });
 
-  const navigate = useNavigate(); // Hook để chuyển hướng
+  const navigate = useNavigate();
 
   const toggleDropdown = (dropdown) => {
     setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
@@ -25,29 +26,33 @@ const Search = () => {
       ...prev,
       [dropdown]: value,
     }));
-    setActiveDropdown(null); // Đóng dropdown sau khi chọn
+    setActiveDropdown(null);
   };
 
+  const isQueryEmpty = (query) => {
+    return Object.values(query).every((value) => !value); // Kiểm tra tất cả giá trị
+  };
+  
   const handleSearch = () => {
-      const queryParams = new URLSearchParams(query).toString(); // Chuyển object thành query string
-      navigate(`/tim-kiem/?${queryParams}`); // Chuyển hướng đến DetailSearch
+      if(!isQueryEmpty(query)){
+        const queryParams = new URLSearchParams(query).toString(); // Chuyển object thành query string
+        navigate(`/tim-kiem/?${queryParams}`);
 
-      // Reset lại thanh tìm kiếm
-    setQuery({
-      category: "",
-      price: "",
-      size: "",
-      color: "",
-      upgrade: "",
-    });
+        setQuery({
+          category: "",
+          color: "",
+          gender:"",
+        });
+      }
   };
 
   const options = {
-    category: ["Áo thun", "Áo sơ mi", "Quần jean", "Váy"],
-    price: ["Dưới 100k", "100k - 200k", "200k - 500k", "Trên 500k"],
-    size: ["S", "M", "L", "XL"],
+    category: ["Áo", "Quần", "Váy","Đầm"],
+    // price: ["Dưới 100k", "100k - 200k", "200k - 500k", "Trên 500k"],
+    // size: ["S", "M", "L", "XL"],
     color: ["Đỏ", "Xanh", "Vàng", "Trắng"],
-    upgrade: ["Standard", "Premium", "Luxury"],
+    gender:["Nam","Nữ","orther"]
+    // upgrade: ["Standard", "Premium", "Luxury"],
   };
 
   return (

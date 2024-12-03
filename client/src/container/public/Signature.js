@@ -18,7 +18,7 @@ const Signature = () => {
     const f = async function fetchData(){  
     const response = await apiGetProductQR(query);
     const data = response?.data?.response
-    const filtered = data.filter((product) => product.category?.header === 'Nữ');
+    const filtered = data.filter((product) => product.category?.header === 'Signature');
     setFilteredProducts(filtered);
   }
   f();

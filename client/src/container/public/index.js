@@ -13,7 +13,9 @@ export { default as Search } from './Search'
 export { default as List } from './List'
 export { default as DetailProduct } from './DetailProduct'
 
-export { default as Solar } from './Solar'
+export { default as Glamour } from './Glamour'
 export { default as Signature} from './Signature'
 export { default as Sapphire} from './Sapphire'
 export { default as DetailSreach} from './DetailSreach'
+
+export { default as LuckyModa} from './Lucky_moda'
