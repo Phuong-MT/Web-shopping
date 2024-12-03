@@ -11,10 +11,12 @@ export const path = {
     ACCOUNT:'thong-tin-tai-khoan',
     CONTACT:'ho-tro-va-hoi-dap',
     SHOPPINGCART:'quan-ly-gio-hang',
-    SOLAR:'solar---shine-together',
+    GLAMOUR:'cozy-glamour',
     HER_SIGNATRUE:'her-signature',
     SAPPHIRE_CHIC:'sapphire-chic',
-    ADMIN: 'ADMIN'
+    ADMIN: 'ADMIN',
+    STEP:'step-1',
+    LUCKYMODA:'lucky-moda'
 }
 
 
@@ -26,8 +28,8 @@ export const text = {
 export const location = [
     {
         id: '1',
-        name: 'SOLAR - SHINE TOGETHER',
-        image: 'https://cotton4u.vn/files/news/2024/11/08/3fc7e89f6744667ef0993bb936db1c85.webp'
+        name: 'COZY GLAMOUR',
+        image: 'https://pubcdn.ivymoda.com/files/news/2024/11/28/web%20-c%E1%BB%ABu%20copy.jpg'
     },
     {
         name: 'HER SIGNATURE',

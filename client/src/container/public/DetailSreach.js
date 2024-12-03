@@ -1,46 +1,67 @@
-import { location } from '../../ultils/constant'
-import { Banner, Sort } from '../../components'
-import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import { apiGetProductQR } from "../../service";
+import React, { useEffect, useState }from "react";
+import { useLocation, useParams,Link } from "react-router-dom";
+import { apiGetProductSreach } from "../../service";
+import { Sort } from "../../components";
 import { formatVietnameseToString } from '../../ultils/Conmon/formatVietnameseToString'
 
 
-const Signature = () => {
-    const [filteredProducts, setFilteredProducts] = useState([]); 
-    const [query, setQuery] = useState({
-      Size: '',
-      Color: '',
-      Price: '',
-      Upgrade: '',
-    });
+const DetailSearch = () => {
+  const location = useLocation();
+  const [data, setData] = useState([]); 
+  const [error, setError] = useState(null);
+  const [filteredProducts, setFilteredProducts] = useState([]); 
+  const searchParams = new URLSearchParams(location.search); // Lấy query string từ URL
+  // Chuyển query string thành object
+  const Sreach = {
+    category: searchParams.get("category") || "",
+    // price: searchParams.get("price") || "",
+    // size: searchParams.get("size") || "",
+    color: searchParams.get("color") || "",
+    gender:searchParams.get("gender") || "",
+    // upgrade: searchParams.get("upgrade") || "",
+  };
+
+  // const [query, setQuery] = useState({
+  //   Size: '',
+  //   Color: '',
+  //   Price: '',
+  //   Upgrade: '',
+  // });
+
   useEffect(() => {
-    const f = async function fetchData(){  
-    const response = await apiGetProductQR(query);
-    const data = response?.data?.response
-    const filtered = data.filter((product) => product.category?.header === 'Signature');
-    setFilteredProducts(filtered);
-  }
-  f();
-  }, [query]); // Chạy lại khi  danh sách sản phẩm thay đổi
+    const fetchSearchResults = async () => {
+      setError(null); // Xóa lỗi cũ
+      try {
+        const response = await apiGetProductSreach(Sreach)
+        
+        setData(response.data.response); // Lưu dữ liệu trả về
+
+        // const filtered = data.filter((product) => 
+        // {
+
+        // });
+        // setFilteredProducts(filtered)
+      } catch (err) {
+        setError(err.message); // Xử lý lỗi
+      }
+      };
+
+    fetchSearchResults();
+  }, [location.search]); // Chỉ gọi lại khi URL thay đổi
+
+  useEffect(() =>{
+
+  })
   return (
-    <div>
-    <div className='flex mt-[20px] flex-wrap'>
-        <div className='w-1/5 flex flex-col pr-[20px]'>
-        <Sort query={query} setQuery={setQuery}/>
-        </div>
-        <div className='pl-[20px] w-4/5'>
-            <h1 className='pb-[26px] text-2xl font-semibold	'> HER SIGNATURE | FALL - WINTER COLLECTION 2024 </h1>
-            {location[1] && (
-            <Banner
-                key={location[1].id}
-                image={location[1].image}
-                name={location[1].name}
-            />
-            )}
-            <div className="flex flex-wrap mt-4">
-                    {filteredProducts.length > 0 ? (
-                        filteredProducts.map((product, index) => (
+    <div className='gap-3'>
+      <div className='flex mt-[20px] flex-wrap'>
+        {/* <div className='w-1/5 flex flex-col pr-[20px]'>
+        <Sort/>
+          </div> */}
+        <div className='pl-[20px] '>
+          <div className="flex flex-wrap mt-4">
+                    {data.length > 0 ? (
+                        data.map((product, index) => (
                             <div key={product.id} className="product-item p-4  mb-4">
                             {/* <p className="text-gray-500">Danh mục: {product.category?.header}</p> */}
                             <img
@@ -78,9 +99,10 @@ const Signature = () => {
                     )}
                 </div>
         </div>
-  </div>
-</div>
-  )
-}
+      </div>
 
-export default Signature
+    </div>
+  );
+};
+
+export default DetailSearch;

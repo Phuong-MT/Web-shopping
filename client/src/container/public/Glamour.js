@@ -5,37 +5,36 @@ import React, { useState, useEffect } from 'react';
 import { apiGetProductQR } from "../../service";
 import { formatVietnameseToString } from '../../ultils/Conmon/formatVietnameseToString'
 
-const Sapphire = () => {
+const Glamour = () => {
     const [filteredProducts, setFilteredProducts] = useState([]); 
-    const [query, setQuery] = useState({
-      Size: '',
-      Color: '',
-      Price: '',
-      Upgrade: '',
-    });
-  useEffect(() => {
-    const f = async function fetchData(){  
-    const response = await apiGetProductQR(query);
-    const data = response?.data?.response
-    const filtered = data.filter((product) => product.category?.header === 'Sapphire');
-    setFilteredProducts(filtered);
-  }
-  f();
-  }, [query]); // Chạy lại khi  danh sách sản phẩm thay đổi
-
-  return (
+        const [query, setQuery] = useState({
+        Size: '',
+        Color: '',
+        Price: '',
+        Upgrade: '',
+        });
+    useEffect(() => {
+        const f = async function fetchData(){  
+        const response = await apiGetProductQR(query);
+        const data = response?.data?.response
+        const filtered = data.filter((product) => product.category?.header === 'Glamour');
+        setFilteredProducts(filtered);
+    }
+        f();
+        }, [query]); // Chạy lại khi  danh sách sản phẩm thay đổi
+    return (
     <div>
         <div className='flex mt-[20px] flex-wrap'>
             <div className='w-1/5 flex flex-col pr-[20px]'>
                 <Sort query={query} setQuery={setQuery}/>
             </div>
             <div className='pl-[20px] w-4/5'>
-                <h1 className='pb-[26px] text-2xl font-semibold	'> SAPPHIRE CHIC | FALL - WINTER 2024 COLLECTION </h1>
-                {location[1] && (
+                <h1 className='pb-[26px] text-2xl font-semibold	'> COZY GLAMOUR | BST ÁO DẠ LÔNG CỪU </h1>
+                {location[0] && (
                 <Banner
-                    key={location[2].id}
-                    image={location[2].image}
-                    name={location[2].name}
+                    key={location[0].id}
+                    image={location[0].image}
+                    name={location[0].name}
                 />
                 )}
                 <div className="flex flex-wrap mt-4">
@@ -77,9 +76,9 @@ const Sapphire = () => {
                     )}
                 </div>
             </div>
-      </div>
+        </div>
     </div>
   )
 }
 
-export default Sapphire
+export default Glamour

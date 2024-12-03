@@ -10,12 +10,12 @@ const ProvinceBtn = ({name, image}) => {
           <img
               src={image}
               alt={name}
-              className='w-[190px] h-[110px] object-cover rounded-tl-md rounded-tr-md'
+              className=' w-[190px] h-[110px] object-cover rounded-tl-md rounded-tr-md'
           />
         
           <div className='font-medium p-2 text-center'>{name}</div>
         </Link>
-    </div>
+    </div> 
   )
 }
 

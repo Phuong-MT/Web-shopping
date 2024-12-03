@@ -41,3 +41,15 @@ export const getProductLimit = async (req, res) => {
         });
     }
 }
+export const getProductSreach = async(req,res) =>{
+    try {
+        const { category, price, size, color, upgrade } = req.query;
+        const response = await services.getProductSreachService(req.query)
+        return res.status(200).json(response);
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Failed at category controller: ' + error
+        });
+    }
+}

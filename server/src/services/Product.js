@@ -107,3 +107,43 @@ export const getProductLimitSerivce = (postId) => new Promise(async (resolve, re
         reject(error)
     }
 })
+export const getProductSreachService = (query) => new Promise(async(resolve, reject) => {
+    try {
+        const {category, color, gender} = query
+        const Gender = gender == 'orther' ? '' :gender
+        console.log(Gender)
+        const response =  await db.Product.findAll({
+            raw: true,
+            nest: true,
+            where:{
+                name :{
+                    [Op.like]: `%${category}%`,
+                }
+            },
+            include:[
+                {
+                    model: db.ProductImage, as: 'images',
+                    attributes: ['imageUrl','color']
+                },
+                {
+                    model: db.Category,as: 'category',
+                    attributes: ['header'],
+                    where:{
+                        header :{
+                            [Op.like]: `%${Gender}%`,
+                        }
+                    }
+
+                }
+            ],
+            attributes: ['id', 'name', 'price', ]
+        })
+        resolve({
+            err: response ? 0 : 1,
+            msg: response ? 'OK' : 'Failed to get.',
+            response 
+        })
+    } catch (error) {
+        reject(error)
+    }
+})

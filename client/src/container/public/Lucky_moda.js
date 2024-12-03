@@ -2,41 +2,42 @@ import { location } from '../../ultils/constant'
 import { Banner, Sort } from '../../components'
 import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getproduct } from '../../store/actions';
+import { apiGetProductQR } from "../../service";
 import { formatVietnameseToString } from '../../ultils/Conmon/formatVietnameseToString'
 
-const Solar = () => {
+const Lucky_moda = () => {
     const [filteredProducts, setFilteredProducts] = useState([]); 
-    const dispatch = useDispatch();
-    const { products } = useSelector((state) => state.product); 
-
-    useEffect(() => {
-        // Lấy tất cả sản phẩm khi component được render
-        dispatch(getproduct());
-      }, [dispatch]);
-
-    useEffect(() => {
-    // Lọc sản phẩm theo tab đang hoạt động
-    const filtered = products.filter((product) => product.category?.header === 'SOLAR');
+    const [query, setQuery] = useState({
+      Size: '',
+      Color: '',
+      Price: '',
+      Upgrade: '',
+    });
+  useEffect(() => {
+    const f = async function fetchData(){  
+    const response = await apiGetProductQR(query);
+    const data = response?.data?.response
+    const filtered = data.filter((product) => product.category?.header === 'Lucky Moda');
     setFilteredProducts(filtered);
-    }, [products]); // Chạy lại khi  danh sách sản phẩm thay đổi
+  }
+  f();
+  }, [query]); // Chạy lại khi  danh sách sản phẩm thay đổi
 
-    return (
+  return (
     <div>
         <div className='flex mt-[20px] flex-wrap'>
             <div className='w-1/5 flex flex-col pr-[20px]'>
-                <Sort/>
+                <Sort query={query} setQuery={setQuery}/>
             </div>
             <div className='pl-[20px] w-4/5'>
-                <h1 className='pb-[26px] text-2xl font-semibold	'> SOLAR - SHINE TOGETHER | FALL - WINTER COLLECTION 2024 </h1>
-                {location[0] && (
+                <h1 className='pb-[26px] text-2xl font-semibold	'> LUCKY MODA | BEST SELLER </h1>
+                {/* {location[1] && (
                 <Banner
-                    key={location[0].id}
-                    image={location[0].image}
-                    name={location[0].name}
+                    key={location[2].id}
+                    image={location[2].image}
+                    name={location[2].name}
                 />
-                )}
+                )} */}
                 <div className="flex flex-wrap mt-4">
                     {filteredProducts.length > 0 ? (
                         filteredProducts.map((product, index) => (
@@ -76,9 +77,9 @@ const Solar = () => {
                     )}
                 </div>
             </div>
-        </div>
+      </div>
     </div>
   )
 }
 
-export default Solar
+export default Lucky_moda
