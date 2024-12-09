@@ -1,7 +1,6 @@
 import React, { useEffect, useState }from "react";
-import { useLocation, useParams,Link } from "react-router-dom";
+import { useLocation,Link } from "react-router-dom";
 import { apiGetProductSreach } from "../../service";
-import { Sort } from "../../components";
 import { formatVietnameseToString } from '../../ultils/Conmon/formatVietnameseToString'
 
 
@@ -9,7 +8,6 @@ const DetailSearch = () => {
   const location = useLocation();
   const [data, setData] = useState([]); 
   const [error, setError] = useState(null);
-  const [filteredProducts, setFilteredProducts] = useState([]); 
   const searchParams = new URLSearchParams(location.search); // Lấy query string từ URL
   // Chuyển query string thành object
   const Sreach = {

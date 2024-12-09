@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import { Home, Login, Nam, Nu, Sale, Homepage, Glamour, Signature, Sapphire, DetailProduct,DetailSreach, LuckyModa} from './container/public'
-import { Step_1 } from './components'
+import { Step_1, Cancel, Successful} from './components'
 import {path} from './ultils/constant'
 import {System, AccountManagement,Contact, ShoppingCart} from './container/system'
 import {admin } from './container/admin'
@@ -8,6 +8,7 @@ function App() {
   return (
     <div className=" bg-primary p-4" >
     	<Routes>
+			{/* <Route path='cancel' element={<Cancel/>}/> */}
 			<Route path={path.HOME} element= {<Home/>}>
 				<Route path= '*' element= {<Homepage/>}/>
 				<Route path={path.LOGIN} element= {<Login/>}/>
@@ -21,6 +22,7 @@ function App() {
 				<Route path={path.SAPPHIRE_CHIC} element= {<Sapphire/>}/>
 				<Route path={path.LUCKYMODA} element={<LuckyModa/>}/>
 				<Route path={path.DETAL_POST__TITLE__POSTID} element={<DetailProduct/>} />
+				{/* <Route path='successful' element={<Successful/>}/> */}
 				{/* <Route path={'chi-tiet/*'} element={<DetailProduct/>} /> */}
 			</Route>
 			<Route path={path.SYSTEM} element={<System />}>

@@ -4,7 +4,7 @@ import appstore from '../assets/appstore.png'
 import googleplay from '../assets/googleplay.png'
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 py-10">
+    <div className="bg-gray-100 py-10">
       <div className="container ml-auto px-6">
         <div className="flex flex-wrap justify-between">
           {/* Logo và Hotline */}
@@ -69,7 +69,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 };
 
