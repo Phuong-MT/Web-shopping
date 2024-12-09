@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Sidebar from '../../components/Sidebar';
-import AccountInfo from '../../components/AccountInfo';
+import {Sidebar,AccountInfo} from '../../components';
+
 
 
 const AccountManagement = () => {

@@ -19,3 +19,5 @@ export {default as CartList} from './CartList'
 export {default as Summary} from './Summary'
 
 export {default as Step_1} from './Step_1'
+export {default as Cancel} from './Cancel'
+export {default as Successful} from './Successful'

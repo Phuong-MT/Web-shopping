@@ -65,9 +65,7 @@ const ShoppingCart = () => {
     );
    
     const handleCheckout = () => {
-        //  sử dụng state để chuyển data qua các trang.
-        const totalPrice = total;
-        navigate('/he-thong/step-1', { state: {totalPrice}  });
+        navigate('/he-thong/step-1',);
     };
 
     return (
