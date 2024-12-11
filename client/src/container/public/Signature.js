@@ -23,6 +23,12 @@ const Signature = () => {
   }
   f();
   }, [query]); // Chạy lại khi  danh sách sản phẩm thay đổi
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    }).format(amount);
+    };
   return (
     <div>
     <div className='flex mt-[20px] flex-wrap'>
@@ -69,7 +75,7 @@ const Signature = () => {
                                 <Link to = {`/chi-tiet/${formatVietnameseToString(product.name)}/${product.id}`}>
                                 <h3 className="text-lg font-sm w-[220px]">{product.name}</h3>
                                 </Link>
-                                <p className="text-gray-700 items-center">{product.price}đ</p>
+                                <p className="text-gray-700 items-center">{formatCurrency(product.price)}</p>
                             </div>
                         ))
                     

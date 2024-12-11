@@ -7,6 +7,12 @@ const CartItem = ({ item, onUpdate, onRemove }) => {
             onUpdate(item.id, newQuantity);
         }
     };
+    const formatCurrency = (amount) => {
+        return new Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+        }).format(amount);
+        };
     return (
         <div className="flex justify-between items-center border-b py-4">
             <div className="flex items-center space-x-4">
@@ -14,7 +20,7 @@ const CartItem = ({ item, onUpdate, onRemove }) => {
                 <div>
                     <h3 className="text-lg font-semibold">Product ID: {item.productId}</h3>
                     <p className="text-sm text-gray-500">Size: {item.Size}</p>
-                    <p className="text-sm text-gray-500">Price: {item.price} VND</p>
+                    <p className="text-sm text-gray-500">Price: {formatCurrency(item.price)} VND</p>
                 </div>
             </div>
             <div className="flex items-center space-x-4">

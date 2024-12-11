@@ -103,7 +103,12 @@ const Step = () => {
       alert("Đặt hàng thất bại! Vui lòng thử lại.");
     }
   };
-
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    }).format(amount);
+    };
 
     return (
       <div className="max-w-4xl mx-auto py-10">
@@ -157,11 +162,11 @@ const Step = () => {
           <div className="space-y-2">
             <div className="flex justify-between">
               <span>Tổng tiền hàng</span>
-              <span>{total}</span>
+              <span>{formatCurrency(total)}</span>
             </div>
             <div className="flex justify-between">
               <span>Tạm tính</span>
-              <span>{total}</span>
+              <span>{formatCurrency(total)}</span>
             </div>
             <div className="flex justify-between">
               <span>Phí vận chuyển</span>
@@ -169,7 +174,7 @@ const Step = () => {
             </div>
             <div className="flex justify-between font-bold">
               <span>Tiền thanh toán</span>
-              <span>{total}</span>
+              <span>{formatCurrency(total)}</span>
             </div>
           </div>
           <button

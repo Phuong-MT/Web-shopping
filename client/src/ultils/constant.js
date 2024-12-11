@@ -14,7 +14,7 @@ export const path = {
     GLAMOUR:'cozy-glamour',
     HER_SIGNATRUE:'her-signature',
     SAPPHIRE_CHIC:'sapphire-chic',
-    ADMIN: 'ADMIN',
+    ADMIN: 'ADMIN/*',
     STEP:'step-1',
     LUCKYMODA:'lucky-moda'
 }
