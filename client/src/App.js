@@ -3,7 +3,7 @@ import { Home, Login, Nam, Nu, Sale, Homepage, Glamour, Signature, Sapphire, Det
 import { Step_1, Cancel, Successful} from './components'
 import {path} from './ultils/constant'
 import {System, AccountManagement,Contact, ShoppingCart} from './container/system'
-import {admin } from './container/admin'
+import {Admin, Adminlogin, AdminManagement } from './container/admin'
 function App() {
   return (
     <div className=" bg-primary p-4" >
@@ -31,8 +31,9 @@ function App() {
 				<Route path={path.SHOPPINGCART} element={<ShoppingCart/>}/>
 				<Route path={path.STEP} element = {<Step_1/>}/>
 			</Route>
-			<Route path={path.ADMIN} element={<admin/>}>
-				<Route path={path.LOGIN} element={<Login/>}/>
+			<Route path={path.ADMIN} element={<Admin/>}>
+				<Route path='*' element={<AdminManagement/>}/>
+				<Route path= 'login' element = {<Adminlogin/>}/>
 			</Route>
     	</Routes>
     </div>

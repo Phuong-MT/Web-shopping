@@ -16,3 +16,14 @@ export const checkout = async(req, res) =>{
         })
     }
 } 
+export const exportPayments = async(req, res) =>{
+    try {
+        const response = await services.exportPayments()
+        res.status(200).json(response);
+    } catch (error) {
+        return res.status(500).json({
+            err:-1,
+            msg: 'Faild at payment controller: '+error
+        })
+    }
+} 

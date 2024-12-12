@@ -13,7 +13,15 @@ export const login = async (req, res) => {
     } catch (error) {
         return res.status(500).json({
             err: -1,
-            msg: 'Fail at auth controller: ' + error
+            msg: 'Fail at admin controller: ' + error
         })
     }
 }
+export const InfoUser = async(req, res) =>{
+    try {
+        const response = await adminService.InfoUser()
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(500).json('Failed at admin controller:' +error)
+    }
+} 

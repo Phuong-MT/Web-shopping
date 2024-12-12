@@ -108,6 +108,13 @@ console.log(formData)
         }
         }
       };
+
+    const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    }).format(amount);
+    };
     return (
         <div className="max-w-4xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -177,7 +184,7 @@ console.log(formData)
                         </div>
                     </div>
                     <div className="text-xl font-semibold text-red-500 my-4">
-                        Giá : {product.price}đ
+                        Giá :{formatCurrency(product.price)}
                     </div>
                     {/* Các tuỳ chọn hoặc nút */}
                     <button className="bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600"

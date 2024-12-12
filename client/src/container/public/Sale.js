@@ -22,6 +22,12 @@ const Sale = () => {
   }
   f();
   }, [query]); // Chạy lại khi  danh sách sản phẩm thay đổi
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND',
+    }).format(amount);
+    };
   return (
     <div className='gap-3'>
     <div className='flex mt-[20px] flex-wrap'>
@@ -69,7 +75,7 @@ const Sale = () => {
                               <h3 className="text-lg font-sm w-[220px]">{product.name}</h3>
                               </Link>
                               <div>
-                              <p className="text-gray-700 items-center">{product.price}đ</p>
+                              <p className="text-gray-700 items-center">{formatCurrency(product.price)}</p>
                               {/* <p className="text-gray-700 items-center line-through">{product.price}đ</p> */}
                               </div>
                           </div>
