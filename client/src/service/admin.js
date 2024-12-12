@@ -1,6 +1,6 @@
 import axiosConfig from '../axiosConfig'
 
-export const apiLogin = (payload) => new Promise(async (resolve, reject) => {
+export const apiLoginAdmin = (payload) => new Promise(async (resolve, reject) => {
     try {
         const response = await axiosConfig({
             method: 'post',
@@ -9,6 +9,18 @@ export const apiLogin = (payload) => new Promise(async (resolve, reject) => {
         })
         resolve(response)
 
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const apiInfoUser = () => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method:'get',
+            url:'/api/v1/admin/infoUser'
+        })
+        resolve(response)
     } catch (error) {
         reject(error)
     }

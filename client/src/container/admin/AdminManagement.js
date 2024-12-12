@@ -25,7 +25,7 @@ const AdminManagement = () => {
     <div>
       <div className="flex h-screen bg-gray-50">
             <Sidebar options={menuOptions} onSelect={setSelectedOption} />
-            <div className="flex-1 p-6">{renderContent()}</div>
+            <div className="w-full">{renderContent()}</div>
         </div>
     </div>
   )

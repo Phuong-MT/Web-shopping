@@ -22,3 +22,21 @@ export const loginService = ({ phone, password }) => new Promise(async (resolve,
         reject(error)
     }
 })
+
+export const InfoUser= () => new Promise(async(resolve, reject) => {
+    try {
+        const response = await db.User.findAll({
+            raw: true,
+            attributes: {
+                exclude: ['password']
+            }
+        })
+        resolve({
+            err: response? 0 : 1,
+            msg: response? 'OK': 'Failed',
+            response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
