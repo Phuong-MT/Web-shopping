@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {ContactCard, ContactForm} from '../../components'
 import icons from '../../ultils/icons'
 
