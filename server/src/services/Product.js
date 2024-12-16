@@ -134,7 +134,16 @@ export const getProductSreachService = (query) => new Promise(async(resolve, rej
                         }
                     }
 
-                }
+                },
+                {
+                    model: db.Infoproduct, as: 'info',
+                    attributes:['information','color'],
+                    where:{
+                        color :{
+                            [Op.like]: `%${color}%`,
+                        }
+                    },
+                },
             ],
             attributes: ['id', 'name', 'price', ]
         })
