@@ -9,14 +9,14 @@ const initState = {
 
 const adminReducer = (state = initState, action) => {
     switch (action.type) {
-        case actionTypes.LOGIN_SUCCESS:
+        case actionTypes.LOGIN_SUCCESS_ADMIN:
             return {
                 ...state,
                 isAdmin: true,
                 token: action.data,
                 msg: ''
             }
-        case actionTypes.LOGIN_FAIL:
+        case actionTypes.LOGIN_FAIL_ADMIN:
             return {
                 ...state,
                 isAdmin: false,
@@ -24,7 +24,7 @@ const adminReducer = (state = initState, action) => {
                 token: null,
                 update: !state.update
             }
-        case actionTypes.LOGOUT:
+        case actionTypes.LOGOUT_ADMIN:
             return {
                 ...state,
                 isAdmin: false,

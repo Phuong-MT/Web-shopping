@@ -25,3 +25,12 @@ export const InfoUser = async(req, res) =>{
         return res.status(500).json('Failed at admin controller:' +error)
     }
 } 
+
+export const GetproductAdmin = async(req, res) =>{
+    try {
+        const response = await adminService.GetproductServiceAdmin()
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(500).json('Failed at admin controller:' +error)
+    }
+}

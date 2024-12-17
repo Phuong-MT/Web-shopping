@@ -6,12 +6,12 @@ export const loginadmin = (payload) => async (dispatch) => {
         const response = await apiLoginAdmin(payload)
         if (response?.data.err === 0) {
             dispatch({
-                type: actionTypes.LOGIN_SUCCESS,
+                type: actionTypes.LOGIN_SUCCESS_ADMIN,
                 data: response.data.token
             })
         } else {
             dispatch({
-                type: actionTypes.LOGIN_FAIL,
+                type: actionTypes.LOGIN_FAIL_ADMIN,
                 data: response.data.msg
             })
         }
@@ -25,5 +25,5 @@ export const loginadmin = (payload) => async (dispatch) => {
 }
 
 export const logoutadmin = () => ({
-    type: actionTypes.LOGOUT
+    type: actionTypes.LOGOUT_ADMIN
 })

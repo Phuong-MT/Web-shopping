@@ -21,4 +21,3 @@ const port = process.env.PORT|| 8888
 const listener = app.listen(port, ()=>{
     console.log('Listening on port ' + listener.address().port)
 })
-// console.log(InfoUser())
