@@ -40,3 +40,35 @@ export const InfoUser= () => new Promise(async(resolve, reject) => {
         reject(error)
     }
 })
+
+export const GetproductServiceAdmin = () => new Promise(async(resolve, reject) => {
+    try {
+        const response = await db.Product.findAll({
+            raw: true,
+            nest: true,
+            include : [
+                {
+                    model: db.Category,as: 'category',
+                    attributes: ['id','header', 'description']
+                },
+                {
+                    model: db.ProductImage, as: 'images',
+                    attributes: ['imageUrl','color']
+                },
+                {
+                    model: db.Infoproduct, as: 'info',
+                    attributes:['information','color','version'],
+                }
+            ],
+            
+            attributes: ['id', 'name', 'price', ],
+       })
+       resolve({
+            err: response? 0 : 1,
+            msg: response? 'OK': 'Failed',
+            response
+       })
+    } catch (error) {
+        reject(error)
+    }
+}) 

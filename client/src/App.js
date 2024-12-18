@@ -33,7 +33,7 @@ function App() {
 			</Route>
 			<Route path={path.ADMIN} element={<Admin/>}>
 				<Route path='*' element={<AdminManagement/>}/>
-				<Route path= 'login' element = {<Adminlogin/>}/>
+				<Route path='login' element = {<Adminlogin/>}/>
 			</Route>
     	</Routes>
     </div>

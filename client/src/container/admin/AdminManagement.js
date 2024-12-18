@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { Sidebar , PaymentInfo, InfoUser} from '../../components'
+import { Sidebar , PaymentInfo, InfoUser, ListProduct} from '../../components'
 const AdminManagement = () => {
     const [selectedOption, setSelectedOption] = useState(1);
     
@@ -13,6 +13,8 @@ const AdminManagement = () => {
 
     const renderContent = () => {
         switch (selectedOption) {
+          case 3:
+            return <ListProduct/>
           case 4:
             return <InfoUser/>
           case 5:

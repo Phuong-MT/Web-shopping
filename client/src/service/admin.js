@@ -25,3 +25,14 @@ export const apiInfoUser = () => new Promise(async(resolve, reject) => {
         reject(error)
     }
 })
+export const apiAdminGetproduct = () => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method:'get',
+            url:'/api/v1/admin/product'
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

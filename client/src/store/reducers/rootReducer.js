@@ -1,5 +1,6 @@
 import authReducer from "./authReducer";
 import userReducer from "./userReducer";
+import adminReducer from "./adminReducer";
 import productReducer from "./productReducer";
 import { combineReducers } from "redux";
 import storage from "redux-persist/lib/storage";
@@ -17,9 +18,15 @@ const authConfig = {
     key: 'auth',
     whitelist: ['isLoggedIn', 'token']
 }
+const adminConfig = {
+    ...commonConfig,
+    key: 'admin',
+    whitelist: ['isAdmin', 'token']
+}
 
 const rootReducer = combineReducers({
     auth: persistReducer(authConfig, authReducer),
+    admin: persistReducer(adminConfig,adminReducer),
     user: userReducer,
     product: productReducer,
 })

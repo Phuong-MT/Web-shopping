@@ -1,17 +1,17 @@
 import actionTypes from './actionTypes'
-import {apiLogin } from '../../service/admin'
+import {apiLoginAdmin } from '../../service/admin'
 
-export const login = (payload) => async (dispatch) => {
+export const loginadmin = (payload) => async (dispatch) => {
     try {
-        const response = await apiLogin(payload)
+        const response = await apiLoginAdmin(payload)
         if (response?.data.err === 0) {
             dispatch({
-                type: actionTypes.LOGIN_SUCCESS,
+                type: actionTypes.LOGIN_SUCCESS_ADMIN,
                 data: response.data.token
             })
         } else {
             dispatch({
-                type: actionTypes.LOGIN_FAIL,
+                type: actionTypes.LOGIN_FAIL_ADMIN,
                 data: response.data.msg
             })
         }
@@ -24,6 +24,6 @@ export const login = (payload) => async (dispatch) => {
     }
 }
 
-export const logout = () => ({
-    type: actionTypes.LOGOUT
+export const logoutadmin = () => ({
+    type: actionTypes.LOGOUT_ADMIN
 })
