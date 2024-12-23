@@ -24,3 +24,14 @@ export const apiGetAmount = () => new Promise(async(resolve, reject) => {
         reject(error)
     }
 })
+export const apipaymentIntentId = (sessionId) => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `api/v1/payment/${sessionId}`,
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

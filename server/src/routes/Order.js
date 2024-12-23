@@ -8,4 +8,5 @@ router.post('/', controller.postOrder)
 router.get('/shopping-cart', controller.getOrder)
 router.delete(`/:orderitemsId`, controller.DeleteOrder)
 router.put('/:orderItemId',controller.UpdateOrder)
+router.get('/:id',controller.ShippingAdress)
 export default router

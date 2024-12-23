@@ -68,3 +68,21 @@ export const DeleteOrder = async(req, res) =>{
         })
     }
 }   
+export const ShippingAdress = async(req,res) =>{
+    const {id} =  req.params
+    if(!id){
+        return res.status(500).json({
+            err:-1,
+            msg: 'Faild at Order controller: '+error
+        })
+    }
+    try {
+        const response = await services.getShippingAdressService(id) 
+        return res.status(200).json(response)
+    } catch (error) {
+        return res.status(500).json({
+            err:-1,
+            msg: 'Faild at Order controller: '+error
+        }) 
+    }
+}

@@ -1,6 +1,10 @@
+import { response } from "express";
+import db from '../models'
+
 const stripe = require("../config/stripe");
 
-export const createCheckoutSession = (amount) =>new Promise(async (resolve, reject) => {
+export const createCheckoutSession = (total) =>new Promise(async (resolve, reject) => {
+    const {amount,id } = total
     try {
         const response = await stripe.checkout.sessions.create({
             line_items: [
@@ -16,9 +20,19 @@ export const createCheckoutSession = (amount) =>new Promise(async (resolve, reje
                 },
             ],
             mode: "payment",
-            success_url: `${process.env.CLIENT_URL}/complete`,
-            cancel_url: `${process.env.CLIENT_URL}/cancel`,
+            success_url: `${process.env.CLIENT_URL}/he-thong/successful/${id}`,
+            cancel_url: `${process.env.CLIENT_URL}/he-thong/cancel`,
         });
+        const existingRecord = await db.ShippingAddress.findOne({
+                where: { postalCode: id },
+              });
+        
+        if (existingRecord) {
+        await existingRecord.update({
+            sessionId: response.id,
+            status: 'Order Successful'
+         });
+        }
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed.',
@@ -28,14 +42,12 @@ export const createCheckoutSession = (amount) =>new Promise(async (resolve, reje
         reject(error)
     }
 }) 
-export 
-const exportPayments = async (req, res) =>new Promise(async(resolve, reject) => {
+export const exportPayments = async (req, res) =>new Promise(async(resolve, reject) => {
     
     try {
         const payments = await stripe.paymentIntents.list({
             limit: 100, // Số giao dịch muốn lấy (tối đa 100)
         });
-
         // Tạo file CSV từ danh sách giao dịch
         const response = payments.data.map((payment) => ({
             id: payment.id,
@@ -44,7 +56,7 @@ const exportPayments = async (req, res) =>new Promise(async(resolve, reject) => 
             status: payment.status,
             description: payment.description,
             created: new Date(payment.created * 1000).toISOString(),
-        }));
+        }))
         resolve({
             err : response? 0 : 1,
             msg: response? 'OK' : 'Failed',
@@ -54,4 +66,17 @@ const exportPayments = async (req, res) =>new Promise(async(resolve, reject) => 
         reject(error)
     }
 })
-
+//sửa lại ....
+export const getPaymentIdServices = (sessionId) =>new Promise(async (resolve, reject) => {
+    try {
+        const session = await stripe.checkout.sessions.retrieve(sessionId);
+        const paymentIntentId = session.payment_intent;
+        resolve({
+            err : paymentIntentId? 0 : 1,
+            msg: paymentIntentId? 'OK' : 'Failed',
+            paymentIntentId
+        })
+    } catch (error) {
+        reject(error)
+    }
+})

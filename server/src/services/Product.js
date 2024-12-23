@@ -111,7 +111,6 @@ export const getProductSreachService = (query) => new Promise(async(resolve, rej
     try {
         const {category, color, gender} = query
         const Gender = gender == 'orther' ? '' :gender
-        console.log(Gender)
         const response =  await db.Product.findAll({
             raw: true,
             nest: true,
@@ -134,7 +133,7 @@ export const getProductSreachService = (query) => new Promise(async(resolve, rej
                         }
                     }
 
-                },
+                }, 
                 {
                     model: db.Infoproduct, as: 'info',
                     attributes:['information','color'],

@@ -34,7 +34,10 @@ export const postOrderService = (formData, userId) => new Promise(async (resolve
 export const getOrderService = (userId) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Order.findAll({
-            where:{userId: userId},
+            where:{
+                userId: userId,
+                status: 'await'
+            },
             include :[
                 {model : db.OrderItem, as:'orderItem',
                    attributes:['id','productId','Size','quantity','price', 'totalPrice', 'imageUrl','productname'],
@@ -125,3 +128,22 @@ export const deleteOrderService = (orderitemsId) => new Promise(async (resolve, 
         });
     }
 });
+
+export const getShippingAdressService = (id) => new Promise(async(resolve, reject) => {
+    try {
+        const response = await db.ShippingAddress.findOne({
+            where: {postalCode: id},
+            attributes: {
+                exclude: ['updatedAt']
+            },
+        })
+        console.log(response)
+        resolve({
+            err: response ? 0 : 1,
+            msg: response ? 'OK' : 'Failed to get Order.',
+            response: response
+        })
+    } catch (error) {
+        reject(error)
+    }
+}) 

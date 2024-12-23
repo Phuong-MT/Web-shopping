@@ -15,7 +15,7 @@ const Login = () => {
         phone: '',
         password: '',
     })
-    console.log(isAdmin)
+    // console.log(isAdmin)
     useEffect(() => {
       isAdmin && navigate('/admin')
     }, [isAdmin])

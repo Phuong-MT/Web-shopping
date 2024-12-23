@@ -72,3 +72,9 @@ export const GetproductServiceAdmin = () => new Promise(async(resolve, reject) =
         reject(error)
     }
 }) 
+export const getOrderAdminService = () =>new Promise(async(resolve, reject) => {
+    try {
+    } catch (error) {
+        reject(error)
+    }
+})
