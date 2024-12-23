@@ -22,14 +22,16 @@ function App() {
 				<Route path={path.SAPPHIRE_CHIC} element= {<Sapphire/>}/>
 				<Route path={path.LUCKYMODA} element={<LuckyModa/>}/>
 				<Route path={path.DETAL_POST__TITLE__POSTID} element={<DetailProduct/>} />
-				{/* <Route path='successful' element={<Successful/>}/> */}
-				{/* <Route path={'chi-tiet/*'} element={<DetailProduct/>} /> */}
+				
+				<Route path={'chi-tiet/*'} element={<DetailProduct/>} />
 			</Route>
 			<Route path={path.SYSTEM} element={<System />}>
 				<Route path={path.ACCOUNT} element= {<AccountManagement/>}/>
 				<Route path={path.CONTACT} element= {<Contact/>}/>
 				<Route path={path.SHOPPINGCART} element={<ShoppingCart/>}/>
 				<Route path={path.STEP} element = {<Step_1/>}/>
+				<Route path= {`successful/:id`} element={<Successful/>}/>
+				<Route path='cancel' element={<Cancel/>}/>
 			</Route>
 			<Route path={path.ADMIN} element={<Admin/>}>
 				<Route path='*' element={<AdminManagement/>}/>

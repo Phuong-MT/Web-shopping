@@ -1,9 +1,10 @@
 import React,{useState, useEffect} from 'react'
 import { InputFormV2 } from './index';
-import { apigetOrder, apiCheckout } from '../service';
+import { useNavigate } from 'react-router-dom';
+import { apigetOrder, apiCheckout, apiShippingAddress } from '../service';
 const Step = () => {
     {/*  Lấy thông tin thanh toán */}
-
+    const navigate = useNavigate();
     const [Data,setData] = useState([])
     useEffect(() =>{
       const f = async() => {
@@ -78,26 +79,34 @@ const Step = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0; // Trả về `true` nếu không có lỗi
   };
+  // const handleCompleteShippingaddress = async () =>{
+  //   try {
+      
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //     alert("Đặt hàng thất bại! Vui lòng thử lại.");
+  //   }
+  // }
   const handleCompleteOrder = async () => {
     if (!validateForm()) {
       // Nếu form không hợp lệ, dừng việc gửi API
       alert("Vui lòng kiểm tra thông tin và thử lại.");
       return;
     }
-
+    const payload = {
+      name: formData.name,
+      phone: formData.phone,
+      address: {
+        city: formData.city,
+        district: formData.district,
+        address: formData.address,
+      },
+    }; 
     try {
-      const payload = {
-        name: formData.name,
-        phone: formData.phone,
-        address: {
-          city: formData.city,
-          district: formData.district,
-          address: formData.address,
-        },
-      };
-     const response = await apiCheckout({amount: total})
-     window.location.href = response.data;
-     console.log(response)
+      const data = await apiShippingAddress(payload)
+      const postalCode = data?.data?.response.postalCode
+      const response = await apiCheckout({amount: total, id: postalCode})
+      window.location.href = response.data.url;
     } catch (error) {
       console.error("Error:", error);
       alert("Đặt hàng thất bại! Vui lòng thử lại.");
@@ -116,7 +125,7 @@ const Step = () => {
       <div className="flex justify-between items-center mb-8">
         <div className="flex-1 border-b-4 border-black text-center pb-2">Giỏ hàng</div>
         <div className="flex-1 border-b-4 border-black text-center pb-2">Đặt hàng</div>
-        <div className="flex-1 border-b-4 text-center pb-2">Thanh toán</div>
+        <div className="flex-1 border-b-4 text-center pb-2">Đặt hàng thành công</div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -184,6 +193,12 @@ const Step = () => {
             Thanh Toán
           </button>
         </div>
+        {/* <button
+            onClick={handleCompleteShippingaddress}
+            className="mt-6 w-full bg-black text-white py-3 rounded"
+          >
+            Thanh Toán
+          </button> */}
       </div>
     </div>
   )

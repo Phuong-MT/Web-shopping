@@ -1,18 +1,20 @@
 import React,{useState} from 'react'
-import { Sidebar , PaymentInfo, InfoUser, ListProduct} from '../../components'
+import { Sidebar , PaymentInfo, InfoUser, ListProduct, ListOrder} from '../../components'
 const AdminManagement = () => {
     const [selectedOption, setSelectedOption] = useState(1);
     
     const menuOptions = [
         { id: 1, text: 'Thông tin tài khoản' },
-        { id: 2, text: 'Sổ địa chỉ' },
-        { id: 3, text: 'Sản phẩm đã xem' },
+        { id: 2, text: 'Danh sách order' },
+        { id: 3, text: 'Danh sách sản phẩm' },
         { id: 4, text: 'Thông tin khách hàng' },
         { id: 5, text: 'Lịch xử thanh toán'}
     ];
 
     const renderContent = () => {
         switch (selectedOption) {
+          case 2:
+            return <ListOrder/>
           case 3:
             return <ListProduct/>
           case 4:

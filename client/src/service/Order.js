@@ -49,3 +49,15 @@ export const apiDeleteOrder = (orderitemsId) => new Promise(async (resolve, reje
         reject(error)
     }
 })
+export const apigetShippingAddress = (id) => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `/api/v1/order/${id}`,
+        })
+        resolve(response)
+
+    } catch (error) {
+        reject(error)
+    }
+})
