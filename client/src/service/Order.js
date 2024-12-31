@@ -78,7 +78,19 @@ export  const apigetInfoOrderSuccessful = () => new Promise(async(resolve, rejec
     try {
         const response = await axiosConfig({
             method: 'get',
-            url: `/api/v1/order//InfoOrder/InfoOrderSuccsessfull`,
+            url: `/api/v1/order/InfoOrder/InfoOrderSuccsessfull`,
+        })
+        resolve(response)
+
+    } catch (error) {
+        reject(error)
+    }
+})
+export const apigetInforOrderAdmin = () =>new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `/api/v1/order/InfoOrder/OrderInAdmin`,
         })
         resolve(response)
 

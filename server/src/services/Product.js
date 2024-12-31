@@ -223,6 +223,85 @@ export const DeleteProduct = (products) => new Promise(async(resolve, reject) =>
             msg: response ? 'Ok' : 'Failed to create product', 
         })
     } catch (error) {
+        await t.rollback();
+        reject(error)
+    }
+})
+
+export const PostUpdateProduct = (product) =>new Promise(async(resolve, reject) => {
+    const {
+        productId,
+        productName,
+        productDescription,
+        productPrice,
+        productCategoryId,
+        productimageUrl,
+        productColorUrl,
+        productInformation,
+        productColor,
+        productVersion
+        } = {...product}
+    const t = await sequelize.transaction();
+    try {
+        // Cập nhật thông tin sản phẩm
+        const [updated] = await db.Product.update(
+            {
+                name: productName,
+                description: productDescription,
+                price: productPrice,
+                categoryId: productCategoryId
+            },
+            {
+                where: { id: productId },
+                transaction: t
+            }
+        );
+    
+        if (!updated) {
+            throw new Error("Product not found or update failed.");
+        }
+    
+        // Xóa dữ liệu cũ trong ProductImage và Infoproduct (nếu cần)
+        await db.ProductImage.destroy({
+            where: { productId },
+            transaction: t
+        });
+    
+        await db.Infoproduct.destroy({
+            where: { productId },
+            transaction: t
+        });
+    
+        // Tạo dữ liệu mới cho bảng ProductImage
+        await db.ProductImage.create(
+            {
+                productId,
+                imageUrl: productimageUrl,
+                color: productColorUrl
+            },
+            { transaction: t }
+        );
+    
+        // Tạo dữ liệu mới cho bảng Infoproduct
+        await db.Infoproduct.create(
+            {
+                productId,
+                information: productInformation,
+                color: productColor,
+                version: productVersion
+            },
+            { transaction: t }
+        );
+    
+        // Commit transaction
+        await t.commit()
+        console.log("Product updated successfully!")
+        resolve({
+            err: updated ? '0':'1',
+            msg: updated ? 'Ok' : 'Failed to Product updated ', 
+        })
+    } catch (error) {
+        await t.rollback()
         reject(error)
     }
 })

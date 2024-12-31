@@ -103,3 +103,34 @@ export const PostDeleteProduct = async(req, res) =>{
         });
     }
 } 
+export const UpdateInfoProduct = async(req, res) =>{
+    const { 
+        productId,
+        productName,
+        productDescription,
+        productPrice,
+        productCategoryId,
+        productimageUrl,
+        productColorUrl,
+        productInformation,
+        productColor,
+        productVersion
+    } = req.body
+    if( !productId|| !productName|| !productDescription || !productPrice || !productCategoryId || !productimageUrl
+        || !productColorUrl|| !productInformation|| !productColor|| !productVersion){
+        console.log('error')
+        return res.status(400).json({
+            err: 1,
+            msg: 'faild post info product to  product update'
+        });
+    }
+    try {
+        const response = await services.PostUpdateProduct(req.body)
+        return res.status(200).json(response);
+    } catch (error) {
+        return res.status(500).json({
+            err: -1,
+            msg: 'Failed at product controller: ' + error
+        });
+    }
+} 

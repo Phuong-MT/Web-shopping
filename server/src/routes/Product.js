@@ -9,4 +9,5 @@ router.get('/sort', controller.getProductQR)
 router.get('/tim-kiem', controller.getProductSreach)
 router.post('/create/productId', controller.PostCreatePorduct)
 router.post('/delete/productId',controller.PostDeleteProduct)
+router.post('/update/productId',controller.UpdateInfoProduct)
 export default router
