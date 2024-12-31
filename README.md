@@ -71,7 +71,7 @@ Step 4: Initialize the database
 
 Run the following command to initialize the database:
 
-cd server
+cd server/src
 npx sequelize db:migrate
 
 Step 5: Start the project
