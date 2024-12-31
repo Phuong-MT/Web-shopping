@@ -41,7 +41,7 @@ Stripe: Integrated payment processing.
 
 Step 1: Clone the repository
 
-git clone https://github.com/your-repo/webshop.git
+git clone https://github.com/Phuong-MT/Web-shopping
 cd webshop
 
 Step 2: Install dependencies
@@ -96,11 +96,25 @@ Open http://localhost:3000 in your browser.
 
 webshop/
 |-- client/          # Frontend code
+    src/
+        |-- assets/           # Static assets like images, fonts, and icons.
+        |-- components/       # Reusable UI components such as buttons, headers, and modals.
+        |-- container/        # High-level containers that combine multiple components to build pages or views.
+        |-- service/          # API service logic for interacting with the backend.
+        |-- store/            # Redux store configuration and state management logic.
+        |-- utils/            # Utility functions and helpers for the frontend.
+        |-- App.js            # Main application component.
+        |-- index.js          # Application entry point.
+        |-- axiosConfig.js    # Axios configuration for API requests.
+        |-- redux.js          # Redux setup and middleware.
+        |-- index.css         # Global CSS styles.
+
 |-- server/          # Backend code
-    |-- models/      # Sequelize models
-    |-- routes/      # API routes
-    |-- controllers/ # API logic
-    |-- migrations/  # Database migrations
+     src/
+        |-- models/      # Sequelize models
+        |-- routes/      # API routes
+        |-- controllers/ # API logic
+        |-- migrations/  # Database migrations
 
 5. Main Features
 
@@ -114,5 +128,5 @@ User Account Management: Sign up, log in, and edit user details.
 
 6. Contact
 
-If you have any questions or contributions, please contact us at: your_email@example.com.
+If you have any questions or contributions, please contact us at: phuong.tm225381@hust.edu.vn
 
