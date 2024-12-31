@@ -35,3 +35,14 @@ export const apipaymentIntentId = (sessionId) => new Promise(async(resolve, reje
         reject(error)
     }
 })
+export const apiRefundPayment = (postalCode) => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'post',
+            url : `api/v1/payment/refund/${postalCode}`
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

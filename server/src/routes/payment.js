@@ -6,4 +6,5 @@ const router = expess.Router()
 router.post('/checkout', controller.checkout)
 router.get('/amount',controller.exportPayments)
 router.get('/:sessionId', controller.paymentIntentId)
+router.post('/refund/:id', controller.RefundPayment)
 export default router

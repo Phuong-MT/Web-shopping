@@ -65,7 +65,15 @@ const ShoppingCart = () => {
     );
    
     const handleCheckout = () => {
-        navigate('/he-thong/step-1',);
+        if(total>0){
+            navigate('/he-thong/step-1',);
+        }else{
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Bạn chưa có order nào",
+              });
+        }
     };
 
     return (

@@ -61,20 +61,20 @@ const ProductDetailModal = ({product, onClose}) => {
                   </div>
                 </div>
     
-                <div className="mt-6 flex space-x-4">
+                {/* <div className="mt-6 flex space-x-4">
                   <button 
                     className="flex-1 bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-                    onClick={() => {/* Chỉnh sửa */}}
+                    onClick={() => {}}
                   >
                     Chỉnh Sửa
                   </button>
                   <button 
                     className="flex-1 bg-red-500 text-white py-2 rounded hover:bg-red-600"
-                    onClick={() => {/* Xóa */}}
+                    onClick={() => {}}
                   >
                     Xóa Sản Phẩm
                   </button>
-                </div>
+                </div> */}
               </div>
             </div>
         </div>

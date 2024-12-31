@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router-dom';
 import { CheckCircle, Truck, Package, Calendar, MapPin, Copy, ArrowRight, User  } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { apigetShippingAddress } from '../service';
+import { apigetShippingAddress, apiputOrderUser } from '../service';
 
 const Successful = () => {
   const navigate = useNavigate()
@@ -14,15 +14,17 @@ const Successful = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        //api update shippingadress -> ('Người dùng khi thanh toán thành công, sẽ thực hiện update địa chỉ để giao hàng.')
           const response = await apigetShippingAddress(id)
-          console.log(response)
           if(response?.data?.err){
-            setError(`${response?.data?.err} lỗi truy cập thông tin giao hàng, bạn có đang tấn công route`)
+            setError(`${response?.data?.err} + ${response?.data?.msg}`)
           }
           if(response?.data?.response){
             setData(response?.data?.response)
           }
-         
+        //api thông tin order 
+        await apiputOrderUser(id)
+          
       } catch (error) {
         setError(error);
       } finally {
@@ -32,7 +34,6 @@ const Successful = () => {
 
     fetchData();
     }, [id]);
-    console.log(data)
   const addOneWeek = (dateString) => {
     const date = new Date(dateString); 
     date.setDate(date.getDate() + 7);  
@@ -51,7 +52,7 @@ const Successful = () => {
     alert(`Order ID: ${id} đã được sao chép vào clipboard.`);
   };
   const handleNavigate = () => {
-    navigate('/he-thong/dav')
+    navigate('/he-thong/quan-ly-don-hang')
   }
   const handleNavigateLocal = () =>{
     navigate('/')

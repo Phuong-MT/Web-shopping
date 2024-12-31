@@ -61,3 +61,28 @@ export const apigetShippingAddress = (id) => new Promise(async(resolve, reject) 
         reject(error)
     }
 })
+export const apiputOrderUser = (postalCode) => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'put',
+            url: `/api/v1/order/Update/${postalCode}`,
+        })
+        resolve(response)
+
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export  const apigetInfoOrderSuccessful = () => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `/api/v1/order//InfoOrder/InfoOrderSuccsessfull`,
+        })
+        resolve(response)
+
+    } catch (error) {
+        reject(error)
+    }
+})

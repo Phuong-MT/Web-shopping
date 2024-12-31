@@ -4,16 +4,15 @@ const AdminManagement = () => {
     const [selectedOption, setSelectedOption] = useState(1);
     
     const menuOptions = [
-        { id: 1, text: 'Thông tin tài khoản' },
-        { id: 2, text: 'Danh sách order' },
+        { id: 1, text: 'Danh sách order' },
         { id: 3, text: 'Danh sách sản phẩm' },
         { id: 4, text: 'Thông tin khách hàng' },
-        { id: 5, text: 'Lịch xử thanh toán'}
+        { id: 5, text: 'Lịch sử thanh toán'}
     ];
 
     const renderContent = () => {
         switch (selectedOption) {
-          case 2:
+          case 1:
             return <ListOrder/>
           case 3:
             return <ListProduct/>

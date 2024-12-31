@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from 'react'
 import { InputFormV2 } from './index';
-import { useNavigate } from 'react-router-dom';
 import { apigetOrder, apiCheckout, apiShippingAddress } from '../service';
+import Swal from 'sweetalert2'
+
 const Step = () => {
     {/*  Lấy thông tin thanh toán */}
-    const navigate = useNavigate();
     const [Data,setData] = useState([])
     useEffect(() =>{
       const f = async() => {
@@ -90,7 +90,11 @@ const Step = () => {
   const handleCompleteOrder = async () => {
     if (!validateForm()) {
       // Nếu form không hợp lệ, dừng việc gửi API
-      alert("Vui lòng kiểm tra thông tin và thử lại.");
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops!',
+          text: `Kiểm tra lại thông tin đặt hàng` ,
+      })
       return;
     }
     const payload = {

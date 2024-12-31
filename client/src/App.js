@@ -1,14 +1,13 @@
 import { Routes, Route } from 'react-router-dom'
 import { Home, Login, Nam, Nu, Sale, Homepage, Glamour, Signature, Sapphire, DetailProduct,DetailSreach, LuckyModa} from './container/public'
-import { Step_1, Cancel, Successful} from './components'
+import { StepOne, Cancel, Successful} from './components'
 import {path} from './ultils/constant'
-import {System, AccountManagement,Contact, ShoppingCart} from './container/system'
+import {System, AccountManagement,Contact, ShoppingCart, OrderSuccessful} from './container/system'
 import {Admin, Adminlogin, AdminManagement } from './container/admin'
 function App() {
   return (
     <div className=" bg-primary p-4" >
     	<Routes>
-			{/* <Route path='cancel' element={<Cancel/>}/> */}
 			<Route path={path.HOME} element= {<Home/>}>
 				<Route path= '*' element= {<Homepage/>}/>
 				<Route path={path.LOGIN} element= {<Login/>}/>
@@ -29,9 +28,10 @@ function App() {
 				<Route path={path.ACCOUNT} element= {<AccountManagement/>}/>
 				<Route path={path.CONTACT} element= {<Contact/>}/>
 				<Route path={path.SHOPPINGCART} element={<ShoppingCart/>}/>
-				<Route path={path.STEP} element = {<Step_1/>}/>
+				<Route path={path.STEP} element = {<StepOne/>}/>
 				<Route path= {`successful/:id`} element={<Successful/>}/>
 				<Route path='cancel' element={<Cancel/>}/>
+				<Route path='quan-ly-don-hang' element={<OrderSuccessful/>}/>
 			</Route>
 			<Route path={path.ADMIN} element={<Admin/>}>
 				<Route path='*' element={<AdminManagement/>}/>
