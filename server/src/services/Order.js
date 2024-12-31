@@ -1,7 +1,7 @@
 import { response } from 'express'
 import db from '../models'
-import { Model } from 'sequelize';
-
+import { Model, where } from 'sequelize';
+const { Op } = require("sequelize");
 
 export const postOrderService = (formData, userId) => new Promise(async (resolve, reject) => {
     try {
@@ -9,7 +9,7 @@ export const postOrderService = (formData, userId) => new Promise(async (resolve
         const totalPrice = price * quantity;
         const newOrder  = await db.Order.create({
             userId: userId,
-            status: 'wait',  
+            status: 'await',  
         })
         const response = await db.OrderItem.create ({
             productId : productId,
@@ -137,7 +137,6 @@ export const getShippingAdressService = (id) => new Promise(async(resolve, rejec
                 exclude: ['updatedAt']
             },
         })
-        console.log(response)
         resolve({
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get Order.',
@@ -147,3 +146,59 @@ export const getShippingAdressService = (id) => new Promise(async(resolve, rejec
         reject(error)
     }
 }) 
+
+export const putOrderUser = (UserId, postalCode) =>new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Order.findAll({
+            where : {
+                userId: UserId,
+            }
+        })
+        const data = response.map(async (order) => {
+            if (order.postalCode === null && order.userId === UserId) { // Ensure the condition is met
+                await order.update({
+                    status: 'Order Successful',
+                    postalCode: postalCode,
+                });
+            }
+        });
+
+        await Promise.all(data); // Wait for all updates to complete
+       resolve({
+        err: data ? '0' : '1',
+        msg :data ? 'Ok' : 'Failed '
+       })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const getInfoOrderSuccessful = (userId) =>new Promise(async(resolve, reject) => {
+    try {
+        const response = await db.Order.findAll({
+            where: {userId : userId,
+                status: {
+                    [Op.ne]: 'await' 
+                    }
+            },
+            include : [
+            {
+                model: db.OrderItem, as: 'orderItem',
+                attributes: {
+                    exclude: ['createdAt','updatedAt']
+                },
+            },
+        ],
+            attributes: {
+                    exclude: ['createdAt','updatedAt']
+                },
+        })
+        resolve({
+            err: response ? '0': '1',
+            msg:response ? 'Ok': 'adcss',
+            response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})

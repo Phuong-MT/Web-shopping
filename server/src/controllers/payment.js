@@ -43,3 +43,18 @@ export const paymentIntentId = async(req, res) =>{
         })
     }
 } 
+export const RefundPayment = async(req, res) =>{
+    try {
+        const postalCode = req.params.id
+        if(!postalCode){
+            return res.status(400).json({ error: "Invalid" });
+        }
+        const response = await services.PostRefundPayment(postalCode)
+        res.status(200).json(response);
+    } catch (error) {
+        return res.status(500).json({
+            err:-1,
+            msg: 'Faild at payment controller: '+error
+        })
+    }
+}

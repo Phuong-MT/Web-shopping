@@ -47,9 +47,6 @@ const DetailSearch = () => {
     fetchSearchResults();
   }, [location.search]); // Chỉ gọi lại khi URL thay đổi
 
-  useEffect(() =>{
-
-  })
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('vi-VN', {
         style: 'currency',

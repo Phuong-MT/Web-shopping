@@ -7,4 +7,6 @@ router.get('/all', controller.getProduct)
 router.get('/limit/:postId', controller.getProductLimit)
 router.get('/sort', controller.getProductQR)
 router.get('/tim-kiem', controller.getProductSreach)
+router.post('/create/productId', controller.PostCreatePorduct)
+router.post('/delete/productId',controller.PostDeleteProduct)
 export default router

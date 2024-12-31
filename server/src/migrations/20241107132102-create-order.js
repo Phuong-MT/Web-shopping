@@ -12,8 +12,8 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
-      totalAmount: {
-        type: Sequelize.DECIMAL
+      postalCode: {
+       type: Sequelize.STRING
       },
       userId: {
         type: Sequelize.INTEGER

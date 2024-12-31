@@ -51,3 +51,29 @@ export const apiGetProductSreach = (query) => new Promise(async (resolve, reject
         reject(error)
     }
 })
+
+export const apiPostCreateProduct =(formData) => new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method:'post',
+            url:'/api/v1/product/create/productId',
+            data: formData
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+}) 
+
+export const apiDeleteProduct = (data) =>new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method :'post',
+            url:'api/v1/product/delete/productId',
+            data:data    
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

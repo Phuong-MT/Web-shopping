@@ -2,6 +2,7 @@ import { query, raw } from 'express'
 import db from '../models'
 import { where } from 'sequelize'
 const { Op } = require("sequelize");
+const {sequelize} = require('../models')
 //GET ALL CATEGORY
 export const getProductSerivce = () => new Promise(async (resolve, reject) => {
     try {
@@ -53,14 +54,14 @@ export const getProductQRSerivce = (query) => new Promise(async (resolve, reject
                  {
                     model: db.Infoproduct, as: 'info',
                     attributes:['information','color','version'],
-                    // where: {
-                    //     color: {
-                    //       [Op.like]: `%${value1}%`,
-                    //     },
-                    //     version: {
-                    //         [Op.like]:  `%${value3}%`
-                    //       },
-                    //   },
+                    where: {
+                        color: {
+                          [Op.like]: `%${value1}%`,
+                        },
+                        version: {
+                            [Op.like]:  `%${value3}%`
+                          },
+                      },
                  }
                 
             ],
@@ -150,6 +151,76 @@ export const getProductSreachService = (query) => new Promise(async(resolve, rej
             err: response ? 0 : 1,
             msg: response ? 'OK' : 'Failed to get.',
             response 
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const createProduct = (data) => new Promise(async(resolve, reject) => {
+    const {
+    productName,
+    productDescription,
+    productPrice,
+    productCategoryId,
+    productimageUrl,
+    productColorUrl,
+    productInformation,
+    productColor,
+    productVersion
+    } = {...data}
+    const t = await sequelize.transaction();
+    try {
+        const product = await db.Product.create({
+            name: productName,
+            description: productDescription, 
+            price: productPrice,
+            categoryId: productCategoryId
+        },{transaction: t})
+        await db.ProductImage.create({
+            productId: product.id,
+            imageUrl: productimageUrl,
+            color: productColorUrl,
+        })
+        await db.Infoproduct.create({
+            productId: product.id,
+            information: productInformation,
+            color: productColor,
+            version: productVersion,    
+        })
+        await t.commit();
+        console.log('Post created successfully!');
+        resolve({
+            err: product ? '0':'1',
+            msg: product ? 'Ok' : 'Failed to create product', 
+        })
+    } catch (error) {
+        await t.rollback();
+        reject(error)
+    }
+})  
+
+export const DeleteProduct = (products) => new Promise(async(resolve, reject) => {
+    const productIds = products.map((product) => product.id)
+    const t = await sequelize.transaction();
+    try {
+        const response = await db.Product.destroy({
+            where: { id: productIds },
+            transaction: t,
+          });
+          await db.ProductImage.destroy({
+            where: { productId: productIds }, // Giả sử Image có productId là khóa ngoại
+            transaction: t,
+          });
+          await db.Infoproduct.destroy({
+            where: { productId: productIds }, // Giả sử Image có productId là khóa ngoại
+            transaction: t,
+          }); 
+          await t.commit();
+          console.log('Post delete product successfully!');
+          resolve({
+            err: response ? '0':'1',
+            msg: response ? 'Ok' : 'Failed to create product', 
         })
     } catch (error) {
         reject(error)

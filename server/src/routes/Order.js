@@ -9,4 +9,6 @@ router.get('/shopping-cart', controller.getOrder)
 router.delete(`/:orderitemsId`, controller.DeleteOrder)
 router.put('/:orderItemId',controller.UpdateOrder)
 router.get('/:id',controller.ShippingAdress)
+router.put('/Update/:id', controller.putOrderUser)
+router.get('/InfoOrder/InfoOrderSuccsessfull', controller.InfoOrderSuccessful)
 export default router

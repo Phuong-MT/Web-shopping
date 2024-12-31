@@ -1,7 +1,9 @@
 import React, { useState, useMemo ,useEffect} from 'react';
 import { Trash2, Edit, Eye, Search, Filter } from 'lucide-react';
-import { apiAdminGetproduct } from '../service';
+import { apiAdminGetproduct, apiDeleteProduct } from '../service';
 import { ProductDetailModal } from '../container/admin';
+import {ProductForm} from '../components/index'
+import Swal from 'sweetalert2'
 
 const ListProduct = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +13,7 @@ const ListProduct = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
-  
+  const [selecteCreate, setSelecteCreate] = useState(null)
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -59,14 +61,48 @@ const ListProduct = () => {
     );
   };
 
-  const handleDelete = () => {
+  const handleDelete = async() => {
     const remainingProducts = products.filter(
       product => !selectedProducts.includes(product.id)
     );
-    setProducts(remainingProducts);
-    setSelectedProducts([]);
+    const productsDelete =  products.filter(
+      product => selectedProducts.includes(product.id)
+    );
+    try {
+      const response = await apiDeleteProduct(productsDelete)
+      if(response?.data?.err === '0'){
+        Swal.fire({
+          icon: 'success',
+          title: 'OK!',
+          text: `Xóa sản phẩm thành công` ,
+      })
+        setProducts(remainingProducts);
+        setSelectedProducts([]);
+      }
+      
+    } catch (error) {
+      setError('Không thể xóa sản phẩm.' + error);
+    }
+    
   };
-
+  const handldeleteOne = async(id) =>{
+    try {
+      const response  = await apiDeleteProduct(id)
+      if(response?.data?.err === '0'){
+          Swal.fire({
+              icon: 'success',
+              title: 'OK!',
+              text: `Xóa sản phẩm thành công` ,
+          })
+          setProducts(products.filter(p => p.id !== id.id))
+      }
+    } catch (error) {
+      setError('Không thể xóa sản phẩm.' + error);
+    }
+  }
+  const handleCreateProduct = () =>{
+    setSelecteCreate(true)
+  }
   const formatCurrency = (amount) => {
     return new Intl.NumberFormat('vi-VN', {
         style: 'currency',
@@ -136,7 +172,7 @@ const ListProduct = () => {
 
         <div className="flex space-x-2">
           <button 
-            onClick={() => {/* Thêm sản phẩm mới */}} 
+            onClick={() => {handleCreateProduct()}} 
             className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
           >
             + Thêm Sản Phẩm
@@ -240,7 +276,7 @@ const ListProduct = () => {
                       className="text-red-500 hover:text-red-700"
                       title="Xóa"
                       onClick={() => {
-                        setProducts(products.filter(p => p.id !== product.id));
+                        handldeleteOne(products.filter(p=> p.id === product.id))
                       }}
                     >
                       <Trash2 size={20} />
@@ -263,6 +299,11 @@ const ListProduct = () => {
         <ProductDetailModal 
           product={selectedProduct} 
           onClose={() => setSelectedProduct(null)}
+        />
+      )}
+      {selecteCreate && (
+        <ProductForm
+           onClose={() => setSelecteCreate(null)}
         />
       )}
     </div>
