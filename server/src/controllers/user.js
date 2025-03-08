@@ -23,6 +23,7 @@ export const updateUserController = async (req, res) => {
 export const getContactcontroller = async (req, res) => {
     const { id } = req.user
     const payload = req.body
+    console.log(payload)
     try {
         if(!payload) return res.status(400).json({
             err: 1,

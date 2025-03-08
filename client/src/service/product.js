@@ -77,3 +77,15 @@ export const apiDeleteProduct = (data) =>new Promise(async(resolve, reject) => {
         reject(error)
     }
 })
+export const apiUpdateInfoProduct = (formData) =>new Promise(async(resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method:'post',
+            url:'/api/v1/product/update/productId',
+            data:formData
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})

@@ -2,7 +2,7 @@ import React, { useState, useMemo ,useEffect} from 'react';
 import { Trash2, Edit, Eye, Search, Filter } from 'lucide-react';
 import { apiAdminGetproduct, apiDeleteProduct } from '../service';
 import { ProductDetailModal } from '../container/admin';
-import {ProductForm} from '../components/index'
+import {ProductForm, ProductUpdate} from '../components/index'
 import Swal from 'sweetalert2'
 
 const ListProduct = () => {
@@ -14,6 +14,7 @@ const ListProduct = () => {
   const [filterCategory, setFilterCategory] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [selecteCreate, setSelecteCreate] = useState(null)
+  const [edit,setedit] = useState(null)
     useEffect(() => {
       const fetchData = async () => {
         try {
@@ -269,6 +270,7 @@ const ListProduct = () => {
                     <button 
                       className="text-yellow-500 hover:text-yellow-700"
                       title="Chỉnh sửa"
+                      onClick={() => setedit(product)}
                     >
                       <Edit size={20} />
                     </button>
@@ -304,6 +306,12 @@ const ListProduct = () => {
       {selecteCreate && (
         <ProductForm
            onClose={() => setSelecteCreate(null)}
+        />
+      )}
+      {edit && (
+        <ProductUpdate
+           onClose={() => setedit(null)}
+           productData = {edit}
         />
       )}
     </div>

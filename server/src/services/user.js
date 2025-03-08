@@ -7,7 +7,6 @@ export const getContact = (payload,id) => new Promise(async (resolve, reject) =>
       });
 
       let response;
-
       if (existingRecord) {
         // Nếu tồn tại, cập nhật bản ghi
         response = await existingRecord.update(payload);
@@ -19,7 +18,7 @@ export const getContact = (payload,id) => new Promise(async (resolve, reject) =>
         // Nếu không tồn tại, tạo bản ghi mới
         response = await db.CustomerSupport.create({
             ...payload,
-            accountId, // Thêm accountId vào bản ghi
+            userId:id, // Thêm accountId vào bản ghi
           });
         resolve({
           err: 0,

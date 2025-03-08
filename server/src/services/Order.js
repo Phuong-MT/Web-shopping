@@ -202,3 +202,32 @@ export const getInfoOrderSuccessful = (userId) =>new Promise(async(resolve, reje
         reject(error)
     }
 })
+export const getinfoOrderAdmin = ()=> new Promise(async(resolve, reject) => {
+    try {
+        const response = await db.Order.findAll({
+            where: {
+                status: {
+                    [Op.ne]: 'await' 
+                    }
+            },
+            include : [
+            {
+                model: db.OrderItem, as: 'orderItem',
+                attributes: {
+                    exclude: ['createdAt','updatedAt']
+                },
+            },
+        ],
+            attributes: {
+                    exclude: ['createdAt','updatedAt']
+                },
+        })
+        resolve({
+            err: response ? '0': '1',
+            msg:response ? 'Ok': 'adcss',
+            response
+        })
+    } catch (error) {
+        reject(error)
+    }
+})
